@@ -36,6 +36,7 @@ public class PizzaApp {
        Order order;
 //        ServiceLocator locator =ServiceLocator.getInstance();
 //        OrderService orderService = (OrderService) locator.lookup("OrderService");
+       
        order = orderService.placeNewOrder(customer, 0, 1, 2);
 //
        System.out.println(order);

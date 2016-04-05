@@ -8,6 +8,7 @@ package com.someone.pizzaservice.service.order;
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.discountcard.NoCard;
 import com.someone.pizzaservice.domain.order.Order;
+import com.someone.pizzaservice.repository.order.InMemOrderRepository;
 import com.someone.pizzaservice.repository.pizza.InMemPizzaRepository;
 import com.someone.pizzaservice.repository.pizza.PizzaRepository;
 import org.junit.After;
@@ -51,7 +52,7 @@ public class SimpleOrderServiceTest {
     public void testPlaceNewOrderUpperLimit() {
         System.out.println("placeNewOrder");
         Customer customer=mock(Customer.class);
-        SimpleOrderService instance = new SimpleOrderService();
+        SimpleOrderService instance = new SimpleOrderService(new InMemOrderRepository(), new InMemPizzaRepository());
         Order result = instance.placeNewOrder(customer, 1,1,1,1,1,1,1,1,1,1,1);
     }
     @Test
@@ -60,7 +61,7 @@ public class SimpleOrderServiceTest {
         System.out.println("placeNewOrder");
         Customer customer=mock(Customer.class);
         when(customer.getDCard()).thenReturn(NoCard.getInstance());
-        SimpleOrderService instance = new SimpleOrderService();
+        SimpleOrderService instance = new SimpleOrderService(new InMemOrderRepository(), new InMemPizzaRepository());
         Order result = instance.placeNewOrder(customer, 1,1,1,1,1,1,1,1,1,1);
         double expTotal=9.7*pizzaRepository.getPizzaByID(1).getPrice();
         double resTotal=result.calculateTotalCost();

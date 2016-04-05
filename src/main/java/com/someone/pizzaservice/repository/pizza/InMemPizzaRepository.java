@@ -18,7 +18,11 @@ import java.util.List;
  */
 public class InMemPizzaRepository implements PizzaRepository {
 
-    private List<Pizza> pizzas = new ArrayList<>();
+    private List<Pizza> pizzas = new ArrayList<>();{
+        pizzas.add(new Pizza("Pizza1", 12.4, PizzaType.Meat));
+        pizzas.add(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian));
+        pizzas.add(new Pizza("Pizza3", 22.5, PizzaType.Sea));
+    }
 
     
 
@@ -27,8 +31,8 @@ public class InMemPizzaRepository implements PizzaRepository {
     }
     @PostConstruction
     public void cookPizzas(){
-        pizzas.add(new Pizza("Pizza1", 12.4, PizzaType.Meat));
-        pizzas.add(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian));
-        pizzas.add(new Pizza("Pizza3", 22.5, PizzaType.Sea));
+    //    pizzas.add(new Pizza("Pizza1", 12.4, PizzaType.Meat));
+    //    pizzas.add(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian));
+    //    pizzas.add(new Pizza("Pizza3", 22.5, PizzaType.Sea));
     }
 }
