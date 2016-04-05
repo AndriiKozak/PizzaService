@@ -16,7 +16,9 @@ import java.util.Map;
  * @author akozak
  */
 public class JavaConfig implements Config {
-    private Map<String,Class> beans =new HashMap();  
+
+    private Map<String, Class> beans = new HashMap();
+
     {
         beans.put("orderRepository", InMemOrderRepository.class);
         beans.put("pizzaRepository", InMemPizzaRepository.class);
@@ -27,6 +29,5 @@ public class JavaConfig implements Config {
     public Class<?> getImpl(String bean) {
         return beans.get(bean);
     }
-    
-    
+
 }

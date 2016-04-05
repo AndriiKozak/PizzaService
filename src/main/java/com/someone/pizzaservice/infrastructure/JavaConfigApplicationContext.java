@@ -87,24 +87,25 @@ public class JavaConfigApplicationContext implements ApplicationContext {
             bean = constructor.newInstance(paramBeans);
         }
 
-        ;
-    
-    public void createBeanProxy() {
-        Set<String> setOfBenchmarkedMethods=new HashSet<>();
-        Method[] methods=clazz.getMethods();
-        for (Method m : methods){
-            if (m.getAnnotation(Benchmark.class)!=null&&m.getAnnotation(Benchmark.class).active())
-            setOfBenchmarkedMethods.add(m.getName());
-        }
-        if (setOfBenchmarkedMethods.isEmpty()) return;
-        Class<?>[] interfaces=clazz.getInterfaces();
-        InvocationHandler handler=new BenchmarkInvocationHandler(bean, setOfBenchmarkedMethods);
-        proxy=Proxy.newProxyInstance(clazz.getClassLoader(), interfaces, handler);
-    }
-
         
     
-    public void callPostConstructMethod() throws Exception {
+    public void createBeanProxy() {
+            Set<String> setOfBenchmarkedMethods = new HashSet<>();
+            Method[] methods = clazz.getMethods();
+            for (Method m : methods) {
+                if (m.getAnnotation(Benchmark.class) != null && m.getAnnotation(Benchmark.class).active()) {
+                    setOfBenchmarkedMethods.add(m.getName());
+                }
+            }
+            if (setOfBenchmarkedMethods.isEmpty()) {
+                return;
+            }
+            Class<?>[] interfaces = clazz.getInterfaces();
+            InvocationHandler handler = new BenchmarkInvocationHandler(bean, setOfBenchmarkedMethods);
+            proxy = Proxy.newProxyInstance(clazz.getClassLoader(), interfaces, handler);
+        }
+
+        public void callPostConstructMethod() throws Exception {
             Method[] methods = clazz.getMethods();
             for (Method m : methods) {
                 if (m.getAnnotation(PostConstruction.class) != null) {
@@ -124,37 +125,40 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         }
 
-        ;
+        
     
     
     
     public Object build() {
-            return (proxy==null)?bean:proxy;
+            return (proxy == null) ? bean : proxy;
         }
     }
-    static class BenchmarkInvocationHandler implements InvocationHandler{
+
+    static class BenchmarkInvocationHandler implements InvocationHandler {
+
         private Object obj;
         private Set<String> setOfBenchmarkedMethods;
 
         public BenchmarkInvocationHandler(Object obj, Set<String> setOfBenchmarkedMethods) {
-            this.setOfBenchmarkedMethods=setOfBenchmarkedMethods;
+            this.setOfBenchmarkedMethods = setOfBenchmarkedMethods;
             this.obj = obj;
         }
-        
+
         @Override
-        public Object invoke(Object proxy, Method method, Object[] args) throws Exception  {
-            Object result; long nanoTime;
-            if (setOfBenchmarkedMethods.contains(method.getName())){
-                nanoTime=-System.nanoTime();
-                result=method.invoke(obj, args);
-                nanoTime+=System.nanoTime();
-                System.out.println("Execution of "+method.getName()+" takes "+nanoTime+ " nanoseconds");
+        public Object invoke(Object proxy, Method method, Object[] args) throws Exception {
+            Object result;
+            long nanoTime;
+            if (setOfBenchmarkedMethods.contains(method.getName())) {
+                nanoTime = -System.nanoTime();
+                result = method.invoke(obj, args);
+                nanoTime += System.nanoTime();
+                System.out.println("Execution of " + method.getName() + " takes " + nanoTime + " nanoseconds");
+            } else {
+                result = method.invoke(obj, args);
             }
-            else
-            result=method.invoke(obj, args);
-            
+
             return result;
         }
-        
+
     };
 }

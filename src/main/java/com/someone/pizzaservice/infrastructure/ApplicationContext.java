@@ -10,5 +10,6 @@ package com.someone.pizzaservice.infrastructure;
  * @author akozak
  */
 public interface ApplicationContext {
-     Object getBean(String bean) throws Exception;
+
+    Object getBean(String bean) throws Exception;
 }

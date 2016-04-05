@@ -18,40 +18,40 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 /**
  *
  * @author Andrii_Kozak1
  */
 public class NoCardTest {
+
     List<Pizza> pizzas;
+
     public NoCardTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         pizzas = new ArrayList<>();
 
-    {
-        pizzas.add(new Pizza("Pizza1test", 12.4, PizzaType.Meat));
-        pizzas.add(new Pizza("Pizza2test", 24.4, PizzaType.Vegeterian));
-        pizzas.add(new Pizza("Pizza3test", 22.5, PizzaType.Sea));
-    } 
+        {
+            pizzas.add(new Pizza("Pizza1test", 12.4, PizzaType.Meat));
+            pizzas.add(new Pizza("Pizza2test", 24.4, PizzaType.Vegeterian));
+            pizzas.add(new Pizza("Pizza3test", 22.5, PizzaType.Sea));
+        }
     }
-    
+
     @After
     public void tearDown() {
     }
-
-    
-    
 
     /**
      * Test of getDiscountedPrice method, of class NoCard.
@@ -59,25 +59,24 @@ public class NoCardTest {
     @Test
     public void testGetDiscountedPriceBigOrder() {
         System.out.println("getDiscountedPrice");
-        pizzas.add(new Pizza("TestExpensivePizza",100500.0,PizzaType.Meat));
+        pizzas.add(new Pizza("TestExpensivePizza", 100500.0, PizzaType.Meat));
         Order order = mock(Order.class);
         when(order.getPizzaList()).thenReturn(pizzas);
         NoCard instance = NoCard.getInstance();
-        double expResult = 12.4+24.4+22.5+0.7*100500;
+        double expResult = 12.4 + 24.4 + 22.5 + 0.7 * 100500;
         double result = instance.getDiscountedPrice(order);
-        assertEquals(expResult,result,0.0);  
+        assertEquals(expResult, result, 0.0);
     }
+
     @Test
     public void testGetDiscountedPriceLittleOrder() {
         System.out.println("getDiscountedPrice");
         Order order = mock(Order.class);
         when(order.getPizzaList()).thenReturn(pizzas);
         NoCard instance = NoCard.getInstance();
-        double expResult = 12.4+24.4+22.5;
+        double expResult = 12.4 + 24.4 + 22.5;
         double result = instance.getDiscountedPrice(order);
-        assertEquals(expResult,result,0.0);  
+        assertEquals(expResult, result, 0.0);
     }
-    
-    
-    
+
 }

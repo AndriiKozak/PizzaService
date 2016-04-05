@@ -10,13 +10,13 @@ package com.someone.pizzaservice.domain.customer;
  * @author Andrii_Kozak1
  */
 public class Address {
+
     private String address;
 
     public Address(String address) {
         this.address = address;
     }
-    
-    
+
     /**
      * @return the address
      */
@@ -35,6 +35,5 @@ public class Address {
     public String toString() {
         return "Address{" + "address=" + address + '}';
     }
-    
-    
+
 }

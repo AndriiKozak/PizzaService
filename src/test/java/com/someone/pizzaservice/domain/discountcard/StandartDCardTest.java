@@ -25,30 +25,31 @@ import static org.mockito.Mockito.when;
  * @author Andrii_Kozak1
  */
 public class StandartDCardTest {
+
     List<Pizza> pizzas;
+
     public StandartDCardTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         pizzas = new ArrayList<>();
 
-    {
-        pizzas.add(new Pizza("Pizza1", 12.4, PizzaType.Meat));
-        pizzas.add(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian));
-        pizzas.add(new Pizza("Pizza3", 22.5, PizzaType.Sea));
-    } 
+        {
+            pizzas.add(new Pizza("Pizza1", 12.4, PizzaType.Meat));
+            pizzas.add(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian));
+            pizzas.add(new Pizza("Pizza3", 22.5, PizzaType.Sea));
+        }
     }
-    
-    
+
     @After
     public void tearDown() {
     }
@@ -59,30 +60,31 @@ public class StandartDCardTest {
     @Test
     public void testGetDiscountedPriceBigTotal() {
         System.out.println("getDiscountedPriceBigTotal");
-        StandartDCard instance=new StandartDCard();
+        StandartDCard instance = new StandartDCard();
         instance.setTotal(100500.0);
         Order order = mock(Order.class);
-        Customer customer =mock(Customer.class);
+        Customer customer = mock(Customer.class);
         when(order.getPizzaList()).thenReturn(pizzas);
         when(order.getCustomer()).thenReturn(customer);
         when(customer.getDCard()).thenReturn(instance);
-        double expResult = 0.7*(12.4+24.4+22.5);
+        double expResult = 0.7 * (12.4 + 24.4 + 22.5);
         double result = instance.getDiscountedPrice(order);
-        assertEquals(expResult,result,0.0);  
+        assertEquals(expResult, result, 0.0);
     }
+
     @Test
     public void testGetDiscountedPriceSmallTotal() {
         System.out.println("getDiscountedPriceSmallTotal");
-        StandartDCard instance=new StandartDCard();
+        StandartDCard instance = new StandartDCard();
         instance.setTotal(100);
         Order order = mock(Order.class);
-        Customer customer =mock(Customer.class);
+        Customer customer = mock(Customer.class);
         when(order.getPizzaList()).thenReturn(pizzas);
         when(order.getCustomer()).thenReturn(customer);
         when(customer.getDCard()).thenReturn(instance);
-        double expResult = 12.4+24.4+22.5-0.1*100;
+        double expResult = 12.4 + 24.4 + 22.5 - 0.1 * 100;
         double result = instance.getDiscountedPrice(order);
-        assertEquals(expResult,result,0.0);  
+        assertEquals(expResult, result, 0.0);
     }
 
     /**
@@ -90,16 +92,14 @@ public class StandartDCardTest {
      */
     @Test
     public void testAddToAccount() {
-        StandartDCard instance=new StandartDCard();
+        StandartDCard instance = new StandartDCard();
         System.out.println("addToAccount");
         Order order = mock(Order.class);
         when(order.getPizzaList()).thenReturn(pizzas);
         instance.addToAccount(order);
-        double expResult=12.4+24.4+22.5;
-        double result=instance.getTotal();
-        assertEquals(expResult,result,0.0);
+        double expResult = 12.4 + 24.4 + 22.5;
+        double result = instance.getTotal();
+        assertEquals(expResult, result, 0.0);
     }
-
-   
 
 }

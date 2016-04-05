@@ -10,5 +10,6 @@ package com.someone.pizzaservice.infrastructure;
  * @author akozak
  */
 public interface Config {
+
     Class<?> getImpl(String bean);
 }
