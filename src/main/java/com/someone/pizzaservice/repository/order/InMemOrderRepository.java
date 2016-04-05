@@ -6,6 +6,7 @@
 package com.someone.pizzaservice.repository.order;
 
 import com.someone.pizzaservice.domain.order.Order;
+import com.someone.pizzaservice.infrastructure.Benchmark;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class InMemOrderRepository implements OrderRepository {
 
     private List<Order> orders = new ArrayList<>();
 
-    @Override
+    @Override @Benchmark
     public Long saveOrder(Order order) {
         orders.add(order);
         return order.getId();

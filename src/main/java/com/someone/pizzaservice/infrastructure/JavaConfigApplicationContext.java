@@ -1,14 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//TASK: реализовать инит метод - вызывать метод инит. 
+// cоздать анотацию бенчмарк. - савить над методом, в случае если она присутствует 
+// над методом - с параметром (active) либо тру, либо фалс. по умолчанию тру.
+// узнать время выполения и вывести в консоль. Написать прокси. 1 - из библиотек 
+// для байткода. класс proxy.newProxyInstance; 
+// внутри methodHandler есть параметр invoke который срабатывает. 
 package com.someone.pizzaservice.infrastructure;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -55,6 +60,7 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         private final Class<?> clazz;
         private Object bean;
+        private Object proxy;
 
         public BeanBuilder(Class<?> clazz) {
             this.clazz = clazz;
@@ -84,9 +90,19 @@ public class JavaConfigApplicationContext implements ApplicationContext {
         ;
     
     public void createBeanProxy() {
+        Set<String> setOfBenchmarkedMethods=new HashSet<>();
+        Method[] methods=clazz.getMethods();
+        for (Method m : methods){
+            if (m.getAnnotation(Benchmark.class)!=null&&m.getAnnotation(Benchmark.class).active())
+            setOfBenchmarkedMethods.add(m.getName());
         }
+        if (setOfBenchmarkedMethods.isEmpty()) return;
+        Class<?>[] interfaces=clazz.getInterfaces();
+        InvocationHandler handler=new BenchmarkInvocationHandler(bean, setOfBenchmarkedMethods);
+        proxy=Proxy.newProxyInstance(clazz.getClassLoader(), interfaces, handler);
+    }
 
-        ;
+        
     
     public void callPostConstructMethod() throws Exception {
             Method[] methods = clazz.getMethods();
@@ -113,7 +129,32 @@ public class JavaConfigApplicationContext implements ApplicationContext {
     
     
     public Object build() {
-            return bean;
+            return (proxy==null)?bean:proxy;
         }
     }
+    static class BenchmarkInvocationHandler implements InvocationHandler{
+        private Object obj;
+        private Set<String> setOfBenchmarkedMethods;
+
+        public BenchmarkInvocationHandler(Object obj, Set<String> setOfBenchmarkedMethods) {
+            this.setOfBenchmarkedMethods=setOfBenchmarkedMethods;
+            this.obj = obj;
+        }
+        
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Exception  {
+            Object result; long nanoTime;
+            if (setOfBenchmarkedMethods.contains(method.getName())){
+                nanoTime=-System.nanoTime();
+                result=method.invoke(obj, args);
+                nanoTime+=System.nanoTime();
+                System.out.println("Execution of "+method.getName()+" takes "+nanoTime+ " nanoseconds");
+            }
+            else
+            result=method.invoke(obj, args);
+            
+            return result;
+        }
+        
+    };
 }
