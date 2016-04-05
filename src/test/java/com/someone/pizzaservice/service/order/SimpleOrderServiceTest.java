@@ -58,11 +58,12 @@ public class SimpleOrderServiceTest {
 
     @Test
     public void testPlaceNewOrder() {
-        PizzaRepository pizzaRepository = new InMemPizzaRepository();
+        InMemPizzaRepository pizzaRepository = new InMemPizzaRepository();
+        pizzaRepository.cookPizzas();
         System.out.println("placeNewOrder");
         Customer customer = mock(Customer.class);
         when(customer.getDCard()).thenReturn(NoCard.getInstance());
-        SimpleOrderService instance = new SimpleOrderService(new InMemOrderRepository(), new InMemPizzaRepository());
+        SimpleOrderService instance = new SimpleOrderService(new InMemOrderRepository(), pizzaRepository);
         Order result = instance.placeNewOrder(customer, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
         double expTotal = 9.7 * pizzaRepository.getPizzaByID(1).getPrice();
         double resTotal = result.calculateTotalCost();

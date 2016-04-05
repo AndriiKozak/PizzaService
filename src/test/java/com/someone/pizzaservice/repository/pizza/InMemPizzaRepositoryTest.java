@@ -47,6 +47,7 @@ public class InMemPizzaRepositoryTest {
         System.out.println("getPizzaByID");
         int id = 2;
         InMemPizzaRepository instance = new InMemPizzaRepository();
+        instance.cookPizzas();
         Pizza result = instance.getPizzaByID(id);
 
         assertEquals(PizzaType.Sea, result.getType());

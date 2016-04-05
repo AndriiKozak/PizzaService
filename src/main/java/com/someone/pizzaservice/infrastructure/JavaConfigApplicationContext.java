@@ -87,9 +87,7 @@ public class JavaConfigApplicationContext implements ApplicationContext {
             bean = constructor.newInstance(paramBeans);
         }
 
-        
-    
-    public void createBeanProxy() {
+        public void createBeanProxy() {
             Set<String> setOfBenchmarkedMethods = new HashSet<>();
             Method[] methods = clazz.getMethods();
             for (Method m : methods) {
@@ -125,11 +123,7 @@ public class JavaConfigApplicationContext implements ApplicationContext {
 
         }
 
-        
-    
-    
-    
-    public Object build() {
+        public Object build() {
             return (proxy == null) ? bean : proxy;
         }
     }
