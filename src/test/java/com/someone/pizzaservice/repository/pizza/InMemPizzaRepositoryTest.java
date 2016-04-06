@@ -19,22 +19,22 @@ import static org.junit.Assert.*;
  * @author Andrii_Kozak1
  */
 public class InMemPizzaRepositoryTest {
-    
+
     public InMemPizzaRepositoryTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -47,13 +47,13 @@ public class InMemPizzaRepositoryTest {
         System.out.println("getPizzaByID");
         int id = 2;
         InMemPizzaRepository instance = new InMemPizzaRepository();
+        instance.cookPizzas();
         Pizza result = instance.getPizzaByID(id);
-        
 
         assertEquals(PizzaType.Sea, result.getType());
-        assertEquals(22.5, result.getPrice(),0.0);
-        assertEquals("Pizza3",result.getName());
-        
+        assertEquals(22.5, result.getPrice(), 0.0);
+        assertEquals("Pizza3", result.getName());
+
     }
-    
+
 }

@@ -8,9 +8,9 @@ package com.someone.pizzaservice.service.order;
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.order.Order;
 import com.someone.pizzaservice.domain.pizza.Pizza;
-import com.someone.pizzaservice.repository.order.InMemOrderRepository;
+import com.someone.pizzaservice.infrastructure.Benchmark;
+import com.someone.pizzaservice.infrastructure.ServiceLocator;
 import com.someone.pizzaservice.repository.order.OrderRepository;
-import com.someone.pizzaservice.repository.pizza.InMemPizzaRepository;
 import com.someone.pizzaservice.repository.pizza.PizzaRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +23,17 @@ public class SimpleOrderService implements OrderService {
 
     public static final int MAX_ORDER_SIZE = 10;
     public static final int MIN_ORDER_SIZE = 1;
-    private OrderRepository orderRepository = new InMemOrderRepository();
-    private PizzaRepository pizzaRepository = new InMemPizzaRepository();
+    ServiceLocator locator = ServiceLocator.getInstance();
+    private OrderRepository orderRepository; //= (OrderRepository)locator.lookup("OrderRepository");
+    private PizzaRepository pizzaRepository; //= (PizzaRepository)locator.lookup("PizzaRepository");
+
+    public SimpleOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository) {
+        this.pizzaRepository = pizzaRepository;
+        this.orderRepository = orderRepository;
+    }
 
     @Override
+    @Benchmark
     public Order placeNewOrder(Customer customer, Integer... pizzasID) {
         List<Pizza> pizzas = pizzasByArrOfId(pizzasID);
         if (pizzas.size() > MAX_ORDER_SIZE) {
@@ -39,7 +46,6 @@ public class SimpleOrderService implements OrderService {
         orderRepository.saveOrder(newOrder);  // set Entity.Order Id and save Entity.Order to in-memory list
         return newOrder;
     }
-    
 
     private Order createOrder(Customer customer, List<Pizza> pizzas) {
         return new Order(customer, pizzas);

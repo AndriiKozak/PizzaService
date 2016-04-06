@@ -20,42 +20,35 @@ import static org.mockito.Mockito.mock;
  * @author Andrii_Kozak1
  */
 public class OrderTest {
-    
+
     public OrderTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
-    
-
-    
-   
-
- 
-    @Test(expected=RuntimeException.class)
+    @Test(expected = RuntimeException.class)
     public void testSetState() {
-        Customer customer=mock(Customer.class);
-        List<Pizza> pizzaList=mock(List.class);
-        Order order=new Order(customer,pizzaList);
+        Customer customer = mock(Customer.class);
+        List<Pizza> pizzaList = mock(List.class);
+        Order order = new Order(customer, pizzaList);
         order.setState(OrderState.DONE);
     }
 
     /**
      * Test of getCustomer method, of class Order.
      */
-  
 }

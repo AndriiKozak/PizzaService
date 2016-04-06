@@ -19,8 +19,9 @@ public class NoCard implements DCard {
     //Singleton temlate
     private static NoCard instance;
 
-    private NoCard() {}
-    
+    private NoCard() {
+    }
+
     public static NoCard getInstance() {
         if (instance == null) {
             instance = new NoCard();
@@ -45,6 +46,7 @@ public class NoCard implements DCard {
     }
 
     @Override
-    public void addToAccount(Order order) {}
+    public void addToAccount(Order order) {
+    }
 
 }

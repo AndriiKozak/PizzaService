@@ -23,8 +23,8 @@ public class Customer {
     public Customer(String name, Address adress) {
         this.id = sId++;
         this.name = name;
-        this.address=adress;
-        dCard=NoCard.getInstance();
+        this.address = adress;
+        dCard = NoCard.getInstance();
     }
 
     public void setName(String name) {
