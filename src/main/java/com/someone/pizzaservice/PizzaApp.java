@@ -14,7 +14,6 @@ import com.someone.pizzaservice.repository.order.OrderRepository;
 import com.someone.pizzaservice.repository.pizza.PizzaRepository;
 import com.someone.pizzaservice.service.order.OrderService;
 
-
 /**
  *
  * @author Andrii_Kozak1
@@ -26,25 +25,19 @@ public class PizzaApp {
      */
     public static void main(String[] args) throws Exception {
 
-       ApplicationContext ac=new JavaConfigApplicationContext();        
-    //   PizzaRepository pizzaRepository= (PizzaRepository) ac.getBean("pizzaRepository");
-     //  OrderRepository orderRepository= (OrderRepository) ac.getBean("orderRepository");
-       OrderService orderService = (OrderService) ac.getBean("orderService");
-     //  System.out.println(pizzaRepository.getPizzaByID(0));
-        Customer customer =
-               new Customer("Andrii", new Address("Geroyev Stalingrada 20a, fl 323"));
-       Order order;
+        ApplicationContext ac = new JavaConfigApplicationContext();
+        //   PizzaRepository pizzaRepository= (PizzaRepository) ac.getBean("pizzaRepository");
+        //  OrderRepository orderRepository= (OrderRepository) ac.getBean("orderRepository");
+        OrderService orderService = (OrderService) ac.getBean("orderService");
+        //  System.out.println(pizzaRepository.getPizzaByID(0));
+        Customer customer
+                = new Customer("Andrii", new Address("Geroyev Stalingrada 20a, fl 323"));
+        Order order;
 //        ServiceLocator locator =ServiceLocator.getInstance();
 //        OrderService orderService = (OrderService) locator.lookup("OrderService");
-       order = orderService.placeNewOrder(customer, 0, 1, 2);
+
+        order = orderService.placeNewOrder(customer, 0, 1, 2);
 //
-       System.out.println(order);
+        System.out.println(order);
     }
 }
-
-//TASK: реализовать инит метод - вызывать метод инит. 
-// cоздать анотацию бенчмарк. - савить над методом, в случае если она присутствует 
-// над методом - с параметром (active) либо тру, либо фалс. по умолчанию тру.
-// узнать время выполения и вывести в консоль. Написать прокси. 1 - из библиотек 
-// для байткода. класс proxy.newProxyInstance; 
-// внутри methodHandler есть параметр invoke которыйс рабатывает. 

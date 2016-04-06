@@ -23,22 +23,14 @@ public class Order {
     static final Set<Transition> ALLOWED_TRANSITIONS = new HashSet<>();
 
     {
-        ALLOWED_TRANSITIONS.add
-        (new Transition(OrderState.NEW, OrderState.NEW));
-        ALLOWED_TRANSITIONS.add
-        (new Transition(OrderState.IN_PROGRESS, OrderState.IN_PROGRESS));
-        ALLOWED_TRANSITIONS.add
-        (new Transition(OrderState.DONE, OrderState.DONE));
-        ALLOWED_TRANSITIONS.add
-        (new Transition(OrderState.CANCELLED, OrderState.CANCELLED));
-        ALLOWED_TRANSITIONS.add
-        (new Transition(OrderState.NEW, OrderState.CANCELLED));
-        ALLOWED_TRANSITIONS.add
-        (new Transition(OrderState.IN_PROGRESS, OrderState.CANCELLED));
-        ALLOWED_TRANSITIONS.add
-        (new Transition(OrderState.NEW, OrderState.IN_PROGRESS));
-        ALLOWED_TRANSITIONS.add
-        (new Transition(OrderState.IN_PROGRESS, OrderState.DONE));
+        ALLOWED_TRANSITIONS.add(new Transition(OrderState.NEW, OrderState.NEW));
+        ALLOWED_TRANSITIONS.add(new Transition(OrderState.IN_PROGRESS, OrderState.IN_PROGRESS));
+        ALLOWED_TRANSITIONS.add(new Transition(OrderState.DONE, OrderState.DONE));
+        ALLOWED_TRANSITIONS.add(new Transition(OrderState.CANCELLED, OrderState.CANCELLED));
+        ALLOWED_TRANSITIONS.add(new Transition(OrderState.NEW, OrderState.CANCELLED));
+        ALLOWED_TRANSITIONS.add(new Transition(OrderState.IN_PROGRESS, OrderState.CANCELLED));
+        ALLOWED_TRANSITIONS.add(new Transition(OrderState.NEW, OrderState.IN_PROGRESS));
+        ALLOWED_TRANSITIONS.add(new Transition(OrderState.IN_PROGRESS, OrderState.DONE));
     }
     private static int sId = 0;
     private long id;
@@ -114,13 +106,9 @@ public class Order {
     /**
      * @return the dCard
      */
-
-
     /**
      * @param dCard the dCard to set
      */
-
-
     /**
      * @return the customer
      */

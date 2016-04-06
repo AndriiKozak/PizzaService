@@ -5,27 +5,41 @@
  */
 package com.someone.pizzaservice;
 
+
 import com.someone.pizzaservice.repository.pizza.PizzaRepository;
+import com.someone.pizzaservice.domain.customer.Address;
+import com.someone.pizzaservice.domain.customer.Customer;
+import com.someone.pizzaservice.domain.order.Order;
+import com.someone.pizzaservice.service.order.OrderService;
+
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
+<<<<<<< HEAD
  * @author akozak
+=======
+ * @author Andrii_Kozak1
+
  */
 public class SpringPizzaApp {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(
-                "resouses/appContext.xml"
-        );
-        System.out.println(appContext.getApplicationName());
-        PizzaRepository pizzaRepository =(PizzaRepository)appContext.getBean("pizzaRepository");
+    public static void main(String[] args) {       
+
+        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("appContext.xml");
+        OrderService orderService = (OrderService) appContext.getBean("orderService");
+        Customer customer
+                = new Customer("Andrii", new Address("Geroyev Stalingrada 20a, fl 323"));
+        Order order=orderService.placeNewOrder(customer, 0, 1, 2);
+        System.out.println(order);
+
         appContext.close();
     }
     
 }
-//Читать docs.spring.io 6й раздел до 6.5
+
+

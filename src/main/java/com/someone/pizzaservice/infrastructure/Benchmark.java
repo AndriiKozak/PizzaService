@@ -12,10 +12,11 @@ import java.lang.annotation.Target;
 
 /**
  *
- * @author akozak
+ * @author Andrii_Kozak1
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface PostConstruction {
+public @interface Benchmark {
 
+    boolean active() default true;
 }
