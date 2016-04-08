@@ -7,6 +7,8 @@ package com.someone.pizzaservice.domain.customer;
 
 import com.someone.pizzaservice.domain.discountcard.DCard;
 import com.someone.pizzaservice.domain.discountcard.NoCard;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -24,7 +26,10 @@ public class Customer {
         this.id = sId++;
         this.name = name;
         this.address = adress;
-        dCard = NoCard.getInstance();
+        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("appContext.xml");
+        
+        dCard = (DCard)appContext.getBean("noCard");
+        appContext.close();
     }
 
     public void setName(String name) {

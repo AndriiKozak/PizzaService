@@ -16,6 +16,8 @@
         <constructor-arg ref="pizzaRepository"/>
         <constructor-arg ref="orderRepository"/>
     </bean>    
+    <bean name="noCard" class="com.someone.pizzaservice.domain.discountcard.NoCard"
+    factory-method="getInstance"/>
     <!-- more bean definitions go here -->
 
 </beans>
