@@ -7,6 +7,7 @@ package com.someone.pizzaservice.domain.customer;
 
 import com.someone.pizzaservice.domain.discountcard.DCard;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
  * @author Andrii_Kozak1
  */
 @Component("customer")
+@Scope("prototype")
 public class Customer {
 
     private static int sId = 0;
