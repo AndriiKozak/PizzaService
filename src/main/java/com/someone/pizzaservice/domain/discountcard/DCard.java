@@ -12,7 +12,7 @@ import com.someone.pizzaservice.domain.order.Order;
  * @author Andrii_Kozak1
  */
 public interface DCard {
-
+    
     double getDiscountedPrice(Order order);
 
     void addToAccount(Order order);

@@ -12,7 +12,9 @@ import com.someone.pizzaservice.domain.order.Order;
  * @author Andrii_Kozak1
  */
 public class StandartDCard implements DCard {
-
+    // This class do calculate dicouts for customers with dicount card, since 
+    // it has all nessesary infomation to do this, in order to implement single
+    // responsibility principle.
     private double total = 0;
     final static double PERCENTAGE_OF_TOTAL_TO_DISCOUNT = 0.1;
     final static double MAXIMAL_DISCOUNT = 0.3;

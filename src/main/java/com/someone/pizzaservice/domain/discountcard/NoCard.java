@@ -15,7 +15,9 @@ import org.springframework.stereotype.Component;
  */
 @Component("noCard")
 public class NoCard implements DCard {
-
+    // This class do calculate dicouts for customers without dicount card.
+    // Idea is to implement common interface of all discounts, even without 
+    // an amount to keep. 
     public static final int DISCOUNT_THRESOLD = 4;
     public static final double DISCOUNT = 0.3;
     //Singleton temlate
