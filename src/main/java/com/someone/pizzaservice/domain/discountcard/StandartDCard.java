@@ -14,8 +14,8 @@ import com.someone.pizzaservice.domain.order.Order;
 public class StandartDCard implements DCard {
 
     private double total = 0;
-    static final double PERCENTAGE_OF_TOTAL_TO_DISCOUNT = 0.1;
-    static final double MAXIMAL_DISCOUNT = 0.3;
+    final static double PERCENTAGE_OF_TOTAL_TO_DISCOUNT = 0.1;
+    final static double MAXIMAL_DISCOUNT = 0.3;
 
     @Override
     public double getDiscountedPrice(Order order) {

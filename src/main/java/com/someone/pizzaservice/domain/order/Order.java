@@ -5,19 +5,21 @@
  */
 package com.someone.pizzaservice.domain.order;
 
-import com.someone.pizzaservice.domain.discountcard.DCard;
-import com.someone.pizzaservice.domain.discountcard.NoCard;
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Andrii_Kozak1
  */
+@Component("order")
+@Scope("prototype")
 public class Order {
 
     static final Set<Transition> ALLOWED_TRANSITIONS = new HashSet<>();
@@ -37,6 +39,9 @@ public class Order {
     private OrderState state;
     private Customer customer;
     private List<Pizza> pizzaList;
+
+    public Order() {
+    }
 
     public Order(Customer customer, List<Pizza> pizzaList) {
         id = sId++;

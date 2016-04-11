@@ -14,11 +14,15 @@ import com.someone.pizzaservice.repository.order.OrderRepository;
 import com.someone.pizzaservice.repository.pizza.PizzaRepository;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Lookup;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Andrii_Kozak1
  */
+@Service("orderService")
 public class SimpleOrderService implements OrderService {
 
     public static final int MAX_ORDER_SIZE = 10;
@@ -27,6 +31,7 @@ public class SimpleOrderService implements OrderService {
     private OrderRepository orderRepository; //= (OrderRepository)locator.lookup("OrderRepository");
     private PizzaRepository pizzaRepository; //= (PizzaRepository)locator.lookup("PizzaRepository");
 
+    @Autowired
     public SimpleOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository) {
         this.pizzaRepository = pizzaRepository;
         this.orderRepository = orderRepository;
@@ -42,13 +47,18 @@ public class SimpleOrderService implements OrderService {
         if (pizzas.size() < MIN_ORDER_SIZE) {
             throw new RuntimeException("Order is less than minimal limit");
         }
-        Order newOrder = createOrder(customer, pizzas);
+        Order newOrder = createOrder(); //(customer, pizzas);
+        newOrder.setCustomer(customer);
+        newOrder.setPizzaList(pizzas);
         orderRepository.saveOrder(newOrder);  // set Entity.Order Id and save Entity.Order to in-memory list
         return newOrder;
     }
 
-    private Order createOrder(Customer customer, List<Pizza> pizzas) {
-        return new Order(customer, pizzas);
+    //this method is overrided in OrderServiceBean. Here it realised only for test purposes;
+    @Lookup
+    protected Order createOrder()//(Customer customer, List<Pizza> pizzas)
+    {
+        return new Order(null, null);//new Order(customer, pizzas);
     }
 
     private List<Pizza> pizzasByArrOfId(Integer[] pizzasID) {

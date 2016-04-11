@@ -8,14 +8,16 @@ package com.someone.pizzaservice.repository.pizza;
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.domain.pizza.PizzaType;
 import com.someone.pizzaservice.infrastructure.Benchmark;
-import com.someone.pizzaservice.infrastructure.PostConstruction;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Andrii_Kozak1
  */
+@Repository("pizzaRepository")
 public class InMemPizzaRepository implements PizzaRepository {
 
     private List<Pizza> pizzas = new ArrayList<>();
@@ -25,7 +27,7 @@ public class InMemPizzaRepository implements PizzaRepository {
         return pizzas.get(id);
     }
 
-    @PostConstruction
+    @PostConstruct
     public void cookPizzas() {
         pizzas.add(new Pizza("Pizza1", 12.4, PizzaType.Meat));
         pizzas.add(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian));

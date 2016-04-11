@@ -7,7 +7,10 @@ package com.someone.pizzaservice;
 
 import com.someone.pizzaservice.domain.customer.Address;
 import com.someone.pizzaservice.domain.customer.Customer;
+import com.someone.pizzaservice.domain.discountcard.DCard;
 import com.someone.pizzaservice.domain.order.Order;
+import com.someone.pizzaservice.repository.order.OrderRepository;
+import com.someone.pizzaservice.repository.pizza.PizzaRepository;
 import com.someone.pizzaservice.service.order.OrderService;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,13 +25,21 @@ public class SpringPizzaApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("appContext.xml");
+        System.out.println("Spring is here!");
+
+        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(new String[]{"appContext.xml"});
+
+      
+
         OrderService orderService = (OrderService) appContext.getBean("orderService");
-        Customer customer
-                = new Customer("Andrii", new Address("Geroyev Stalingrada 20a, fl 323"));
-        Order order=orderService.placeNewOrder(customer, 0, 1, 2);
+
+        Customer customer = (Customer) appContext.getBean("customer");
+        customer.setName("Andrii");
+        customer.setAdress(new Address("Geroyev Stalingrada 20a, fl 323"));
+        Order order = orderService.placeNewOrder(customer, 0, 1, 2);
         System.out.println(order);
+
         appContext.close();
     }
-    
+
 }

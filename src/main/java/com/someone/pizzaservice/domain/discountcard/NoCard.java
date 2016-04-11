@@ -7,11 +7,13 @@ package com.someone.pizzaservice.domain.discountcard;
 
 import com.someone.pizzaservice.domain.order.Order;
 import com.someone.pizzaservice.domain.pizza.Pizza;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Andrii_Kozak1
  */
+@Component("noCard")
 public class NoCard implements DCard {
 
     public static final int DISCOUNT_THRESOLD = 4;
@@ -19,7 +21,7 @@ public class NoCard implements DCard {
     //Singleton temlate
     private static NoCard instance;
 
-    private NoCard() {
+    public NoCard() {
     }
 
     public static NoCard getInstance() {

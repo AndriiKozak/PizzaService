@@ -9,11 +9,13 @@ import com.someone.pizzaservice.domain.order.Order;
 import com.someone.pizzaservice.infrastructure.Benchmark;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Andrii_Kozak1
  */
+@Repository("orderRepository")
 public class InMemOrderRepository implements OrderRepository {
 
     private List<Order> orders = new ArrayList<>();

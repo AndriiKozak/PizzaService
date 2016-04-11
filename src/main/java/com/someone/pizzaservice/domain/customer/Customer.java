@@ -6,14 +6,14 @@
 package com.someone.pizzaservice.domain.customer;
 
 import com.someone.pizzaservice.domain.discountcard.DCard;
-import com.someone.pizzaservice.domain.discountcard.NoCard;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Andrii_Kozak1
  */
+@Component("customer")
 public class Customer {
 
     private static int sId = 0;
@@ -22,14 +22,17 @@ public class Customer {
     private Address address;
     private DCard dCard;
 
+    public Customer() {
+    }
+
     public Customer(String name, Address adress) {
         this.id = sId++;
         this.name = name;
         this.address = adress;
-        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("appContext.xml");
-        
-        dCard = (DCard)appContext.getBean("noCard");
-        appContext.close();
+        //    ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("appContext.xml");
+        //      dCard=NoCard.getInstance();
+        //    dCard = (DCard)appContext.getBean("noCard");
+        //    appContext.close();
     }
 
     public void setName(String name) {
@@ -82,6 +85,7 @@ public class Customer {
     /**
      * @param dcard the dcard to set
      */
+    @Autowired
     public void setDCard(DCard dCard) {
         this.dCard = dCard;
     }
