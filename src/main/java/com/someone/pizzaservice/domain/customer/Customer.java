@@ -29,10 +29,6 @@ public class Customer {
         this.id = sId++;
         this.name = name;
         this.address = adress;
-        //    ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("appContext.xml");
-        //      dCard=NoCard.getInstance();
-        //    dCard = (DCard)appContext.getBean("noCard");
-        //    appContext.close();
     }
 
     public void setName(String name) {

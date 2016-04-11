@@ -26,18 +26,15 @@ public class PizzaApp {
     public static void main(String[] args) throws Exception {
 
         ApplicationContext ac = new JavaConfigApplicationContext();
-        //   PizzaRepository pizzaRepository= (PizzaRepository) ac.getBean("pizzaRepository");
-        //  OrderRepository orderRepository= (OrderRepository) ac.getBean("orderRepository");
+ 
         OrderService orderService = (OrderService) ac.getBean("orderService");
-        //  System.out.println(pizzaRepository.getPizzaByID(0));
+ 
         Customer customer
                 = new Customer("Andrii", new Address("Geroyev Stalingrada 20a, fl 323"));
         Order order;
-//        ServiceLocator locator =ServiceLocator.getInstance();
-//        OrderService orderService = (OrderService) locator.lookup("OrderService");
+
 
         order = orderService.placeNewOrder(customer, 0, 1, 2);
-//
         System.out.println(order);
     }
 }
