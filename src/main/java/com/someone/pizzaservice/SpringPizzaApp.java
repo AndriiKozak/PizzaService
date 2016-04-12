@@ -26,8 +26,8 @@ public class SpringPizzaApp {
      */
     public static void main(String[] args) {
         System.out.println("Spring is here!");
-
-        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(new String[]{"appContext.xml"});
+        ConfigurableApplicationContext repContext = new ClassPathXmlApplicationContext(new String[]{"repContext.xml"});    
+        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(new String[]{"appContext.xml"},repContext);
 
       
 
