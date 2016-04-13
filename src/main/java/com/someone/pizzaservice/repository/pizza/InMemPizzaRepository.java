@@ -22,7 +22,7 @@ public class InMemPizzaRepository implements PizzaRepository {
 
     private List<Pizza> pizzas = new ArrayList<>();
 
-    @Benchmark(active = false)
+    @Benchmark
     public Pizza getPizzaByID(Integer id) {
         return pizzas.get(id);
     }

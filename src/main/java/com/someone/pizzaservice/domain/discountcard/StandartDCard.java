@@ -12,6 +12,7 @@ import com.someone.pizzaservice.domain.order.Order;
  * @author Andrii_Kozak1
  */
 public class StandartDCard implements DCard {
+
     // This class do calculate dicouts for customers with dicount card, since 
     // it has all nessesary infomation to do this, in order to implement single
     // responsibility principle.

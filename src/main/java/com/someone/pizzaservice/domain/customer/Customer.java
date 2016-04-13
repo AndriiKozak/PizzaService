@@ -6,10 +6,9 @@
 package com.someone.pizzaservice.domain.customer;
 
 import com.someone.pizzaservice.domain.discountcard.DCard;
-import com.someone.pizzaservice.infrastructure.Domain;
+import com.someone.pizzaservice.infrastructure.Benchmark;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 
 /**
  *
@@ -21,7 +20,7 @@ public class Customer implements FactoryBean<Customer> {
 
     @Override
     public Customer getObject() throws Exception {
-        return new Customer(); 
+        return new Customer();
     }
 
     @Override
@@ -31,7 +30,7 @@ public class Customer implements FactoryBean<Customer> {
 
     @Override
     public boolean isSingleton() {
-       return false; 
+        return false;
     }
 
     private static int sId = 0;
