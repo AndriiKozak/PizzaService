@@ -7,18 +7,18 @@ package com.someone.pizzaservice.domain.order;
 
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.pizza.Pizza;
+import com.someone.pizzaservice.infrastructure.Domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Andrii_Kozak1
  */
-@Component("order")
+@Domain
 @Scope("prototype")
 public class Order {
 

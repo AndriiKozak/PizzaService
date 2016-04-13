@@ -6,17 +6,33 @@
 package com.someone.pizzaservice.domain.customer;
 
 import com.someone.pizzaservice.domain.discountcard.DCard;
+import com.someone.pizzaservice.infrastructure.Domain;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Andrii_Kozak1
  */
-@Component("customer")
-@Scope("prototype")
-public class Customer {
+//@Domain
+//@Scope("prototype")
+public class Customer implements FactoryBean<Customer> {
+
+    @Override
+    public Customer getObject() throws Exception {
+        return new Customer(); 
+    }
+
+    @Override
+    public Class<?> getObjectType() {
+        return Customer.class;
+    }
+
+    @Override
+    public boolean isSingleton() {
+       return false; 
+    }
 
     private static int sId = 0;
     private int id;

@@ -32,7 +32,8 @@ public class SpringPizzaApp {
       
         OrderService orderService = (OrderService) appContext.getBean("orderService");
 
-        Customer customer = (Customer) appContext.getBean("customer");
+        Customer customer = appContext.getBean(Customer.class);
+        
         customer.setName("Andrii");
         customer.setAdress(new Address("Geroyev Stalingrada 20a, fl 323"));
         Order order = orderService.placeNewOrder(customer, 0, 1, 2);
