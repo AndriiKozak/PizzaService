@@ -27,6 +27,8 @@ public class SpringPizzaApp {
     public static void main(String[] args) {
 
         ConfigurableApplicationContext repoContext = new ClassPathXmlApplicationContext(new String[]{"repoContext.xml"});
+        repoContext.getEnvironment().setActiveProfiles("dev");
+        repoContext.refresh();
         ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(new String[]{"appContext.xml"}, repoContext);
 
         OrderService orderService = appContext.getBean(OrderService.class);

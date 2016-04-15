@@ -22,7 +22,7 @@ public class BenchmarkProxyBeanPostprocessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        // System.out.println("before "+ beanName);
+         System.out.println("before "+ beanName+" "+bean.getClass().getCanonicalName());
         return bean;
     }
 

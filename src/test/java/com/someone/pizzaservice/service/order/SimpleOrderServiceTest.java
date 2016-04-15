@@ -5,12 +5,11 @@
  */
 package com.someone.pizzaservice.service.order;
 
+import com.someone.pizzaservice.RepositoryTestConfig;
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.discountcard.NoCard;
 import com.someone.pizzaservice.domain.order.Order;
-import com.someone.pizzaservice.repository.order.InMemOrderRepository;
 import com.someone.pizzaservice.repository.pizza.InMemPizzaRepository;
-import com.someone.pizzaservice.repository.pizza.PizzaRepository;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -19,12 +18,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author Andrii_Kozak1
  */
-public class SimpleOrderServiceTest {
+
+public class SimpleOrderServiceTest extends RepositoryTestConfig {
+    @Autowired
+    OrderService orderService;
 
     public SimpleOrderServiceTest() {
     }
@@ -52,8 +55,7 @@ public class SimpleOrderServiceTest {
     public void testPlaceNewOrderUpperLimit() {
         System.out.println("placeNewOrder");
         Customer customer = mock(Customer.class);
-        SimpleOrderService instance = new SimpleOrderService(new InMemOrderRepository(), new InMemPizzaRepository());
-        Order result = instance.placeNewOrder(customer, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+        Order result = orderService.placeNewOrder(customer, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
     }
 
     @Test
@@ -63,8 +65,7 @@ public class SimpleOrderServiceTest {
         System.out.println("placeNewOrder");
         Customer customer = mock(Customer.class);
         when(customer.getDCard()).thenReturn(NoCard.getInstance());
-        SimpleOrderService instance = new SimpleOrderService(new InMemOrderRepository(), pizzaRepository);
-        Order result = instance.placeNewOrder(customer, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+        Order result = orderService.placeNewOrder(customer, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
         double expTotal = 9.7 * pizzaRepository.getPizzaByID(1).getPrice();
         double resTotal = result.calculateTotalCost();
         assertEquals(expTotal, resTotal, 0.0000001);
