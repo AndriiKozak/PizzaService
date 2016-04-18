@@ -43,9 +43,9 @@ public class NoCardTest {
         pizzas = new ArrayList<>();
 
         {
-            pizzas.add(new Pizza("Pizza1test", 12.4, PizzaType.Meat));
-            pizzas.add(new Pizza("Pizza2test", 24.4, PizzaType.Vegeterian));
-            pizzas.add(new Pizza("Pizza3test", 22.5, PizzaType.Sea));
+            pizzas.add(new Pizza(1, "Pizza1test", 12.4, PizzaType.Meat));
+            pizzas.add(new Pizza(2, "Pizza2test", 24.4, PizzaType.Vegeterian));
+            pizzas.add(new Pizza(3, "Pizza3test", 22.5, PizzaType.Sea));
         }
     }
 
@@ -59,7 +59,7 @@ public class NoCardTest {
     @Test
     public void testGetDiscountedPriceBigOrder() {
         System.out.println("getDiscountedPrice");
-        pizzas.add(new Pizza("TestExpensivePizza", 100500.0, PizzaType.Meat));
+        pizzas.add(new Pizza(4, "TestExpensivePizza", 100500.0, PizzaType.Meat));
         Order order = mock(Order.class);
         when(order.getPizzaList()).thenReturn(pizzas);
         NoCard instance = NoCard.getInstance();

@@ -5,23 +5,33 @@
  */
 package com.someone.pizzaservice.domain.pizza;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+
 /**
  *
  * @author Andrii_Kozak1
  */
+@Entity
 public class Pizza {
-
-    private static int sId = 0;
+    @Id 
     private long id;
     private String name;
     private Double price;
+    @Enumerated(EnumType.STRING)
+    @Column(name="pizzatype")
     private PizzaType type;
 
-    public Pizza(String name, Double price, PizzaType type) {
+    
+    public Pizza(){}
+    public Pizza(int id, String name, Double price, PizzaType type) {
         this.name = name;
         this.price = price;
         this.type = type;
-        this.id = sId++;
+        this.id = id;
     }
 
     /**

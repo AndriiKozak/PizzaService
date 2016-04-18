@@ -22,15 +22,15 @@ public class InMemPizzaRepository implements PizzaRepository {
 
     private List<Pizza> pizzas = new ArrayList<>();
 
-    @Benchmark(active = false)
+    //@Benchmark(active = false)
     public Pizza getPizzaByID(Integer id) {
         return pizzas.get(id);
     }
 
     @PostConstruct
     public void cookPizzas() {
-        pizzas.add(new Pizza("Pizza1", 12.4, PizzaType.Meat));
-        pizzas.add(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian));
-        pizzas.add(new Pizza("Pizza3", 22.5, PizzaType.Sea));
+        pizzas.add(new Pizza(1,"Pizza1", 12.4, PizzaType.Meat));
+        pizzas.add(new Pizza(2,"Pizza2", 24.4, PizzaType.Vegeterian));
+        pizzas.add(new Pizza(3,"Pizza3", 22.5, PizzaType.Sea));
     }
 }

@@ -44,9 +44,9 @@ public class StandartDCardTest {
         pizzas = new ArrayList<>();
 
         {
-            pizzas.add(new Pizza("Pizza1", 12.4, PizzaType.Meat));
-            pizzas.add(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian));
-            pizzas.add(new Pizza("Pizza3", 22.5, PizzaType.Sea));
+            pizzas.add(new Pizza(1, "Pizza1", 12.4, PizzaType.Meat));
+            pizzas.add(new Pizza(2, "Pizza2", 24.4, PizzaType.Vegeterian));
+            pizzas.add(new Pizza(3, "Pizza3", 22.5, PizzaType.Sea));
         }
     }
 
