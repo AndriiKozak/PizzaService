@@ -37,6 +37,7 @@
             <version>4.2.5.RELEASE</version>
         </dependency>
         <dependency>
+
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>4.2.5.RELEASE</version>
@@ -51,6 +52,12 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>5.1.0.Final</version>
         </dependency>
+
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+        </dependency>    
+
  
     </dependencies>
     <reporting>

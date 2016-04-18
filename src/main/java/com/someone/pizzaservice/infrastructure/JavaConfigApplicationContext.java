@@ -128,31 +128,4 @@ public class JavaConfigApplicationContext implements ApplicationContext {
         }
     }
 
-    static class BenchmarkInvocationHandler implements InvocationHandler {
-
-        private Object obj;
-        private Set<String> setOfBenchmarkedMethods;
-
-        public BenchmarkInvocationHandler(Object obj, Set<String> setOfBenchmarkedMethods) {
-            this.setOfBenchmarkedMethods = setOfBenchmarkedMethods;
-            this.obj = obj;
-        }
-
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args) throws Exception {
-            Object result;
-            long nanoTime;
-            if (setOfBenchmarkedMethods.contains(method.getName())) {
-                nanoTime = -System.nanoTime();
-                result = method.invoke(obj, args);
-                nanoTime += System.nanoTime();
-                System.out.println("Execution of " + method.getName() + " takes " + nanoTime + " nanoseconds");
-            } else {
-                result = method.invoke(obj, args);
-            }
-
-            return result;
-        }
-
-    };
 }

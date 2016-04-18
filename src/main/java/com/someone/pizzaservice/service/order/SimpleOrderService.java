@@ -47,7 +47,7 @@ public class SimpleOrderService implements OrderService {
         if (pizzas.size() < MIN_ORDER_SIZE) {
             throw new RuntimeException("Order is less than minimal limit");
         }
-        Order newOrder = createOrder(); 
+        Order newOrder = createOrder();
         newOrder.setCustomer(customer);
         newOrder.setPizzaList(pizzas);
         orderRepository.saveOrder(newOrder);  // set Entity.Order Id and save Entity.Order to in-memory list
@@ -56,8 +56,7 @@ public class SimpleOrderService implements OrderService {
 
     //this method is overrided in OrderServiceBean. Here it realised only for test purposes;
     @Lookup
-    protected Order createOrder()
-    {
+    protected Order createOrder() {
         return new Order(null, null);
     }
 
@@ -65,7 +64,7 @@ public class SimpleOrderService implements OrderService {
         List<Pizza> pizzas = new ArrayList<>();
 
         for (Integer id : pizzasID) {
-            pizzas.add(pizzaRepository.getPizzaByID(id)); 
+            pizzas.add(pizzaRepository.getPizzaByID(id));
         }
         return pizzas;
     }

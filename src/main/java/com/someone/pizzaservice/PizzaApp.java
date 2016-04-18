@@ -26,13 +26,12 @@ public class PizzaApp {
     public static void main(String[] args) throws Exception {
 
         ApplicationContext ac = new JavaConfigApplicationContext();
- 
+
         OrderService orderService = (OrderService) ac.getBean("orderService");
- 
+
         Customer customer
                 = new Customer("Andrii", new Address("Geroyev Stalingrada 20a, fl 323"));
         Order order;
-
 
         order = orderService.placeNewOrder(customer, 0, 1, 2);
         System.out.println(order);

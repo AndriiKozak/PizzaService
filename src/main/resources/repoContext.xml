@@ -13,4 +13,6 @@
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>  
+
+    <bean class="com.someone.pizzaservice.infrastructure.BenchmarkProxyBeanPostprocessor"></bean>   
 </beans>

@@ -13,9 +13,9 @@ import java.lang.annotation.Target;
 /**
  *
  * @author akozak
-*/
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Domain {
-    
+
 }

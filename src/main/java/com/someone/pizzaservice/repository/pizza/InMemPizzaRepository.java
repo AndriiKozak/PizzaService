@@ -20,9 +20,12 @@ import org.springframework.stereotype.Repository;
 @Repository("pizzaRepository")
 public class InMemPizzaRepository implements PizzaRepository {
 
-    private List<Pizza> pizzas = new ArrayList<>();
+    private List<Pizza> pizzas = new ArrayList<Pizza>();
 
-    //@Benchmark(active = false)
+
+    //@Benchmark(active = false
+    @Benchmark
+
     public Pizza getPizzaByID(Integer id) {
         return pizzas.get(id);
     }

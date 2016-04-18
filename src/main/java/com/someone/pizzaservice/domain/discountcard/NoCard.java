@@ -7,14 +7,15 @@ package com.someone.pizzaservice.domain.discountcard;
 
 import com.someone.pizzaservice.domain.order.Order;
 import com.someone.pizzaservice.domain.pizza.Pizza;
-import org.springframework.stereotype.Component;
+import com.someone.pizzaservice.infrastructure.Domain;
 
 /**
  *
  * @author Andrii_Kozak1
  */
-@Component("noCard")
+@Domain
 public class NoCard implements DCard {
+
     // This class do calculate dicouts for customers without dicount card.
     // Idea is to implement common interface of all discounts, even without 
     // an amount to keep. 
