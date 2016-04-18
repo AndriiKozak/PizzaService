@@ -21,7 +21,6 @@ public class InMemOrderRepository implements OrderRepository {
     private List<Order> orders = new ArrayList<>();
 
     @Override
-    @Benchmark
     public Long saveOrder(Order order) {
         orders.add(order);
         return order.getId();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<!--<beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" 
        xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -9,6 +9,6 @@
     <context:component-scan base-package="com.someone.pizzaservice.service, com.someone.pizzaservice.domain">
         <context:include-filter type="annotation" expression="com.someone.pizzaservice.infrastructure.Domain"/>
     </context:component-scan>
-    <bean class="com.someone.pizzaservice.domain.customer.Customer"></bean> 
+ <bean class="com.someone.pizzaservice.domain.customer.Customer"></bean>                       
     <bean class="com.someone.pizzaservice.infrastructure.BenchmarkProxyBeanPostprocessor"></bean> 
-</beans>
+</beans> -->

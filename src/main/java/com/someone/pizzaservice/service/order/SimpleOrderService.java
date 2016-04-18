@@ -38,7 +38,7 @@ public class SimpleOrderService implements OrderService {
     }
 
     @Override
-    @Benchmark
+  //  @Benchmark
     public Order placeNewOrder(Customer customer, Integer... pizzasID) {
         List<Pizza> pizzas = pizzasByArrOfId(pizzasID);
         if (pizzas.size() > MAX_ORDER_SIZE) {

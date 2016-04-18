@@ -15,8 +15,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Andrii_Kozak1
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:/appContext.xml","classpath:/repoTestContext.xml"})
-@ActiveProfiles("dev")
+@ContextConfiguration(locations={"classpath:/appContext.xml"})
+//        {
+//    , 
+//    "classpath:/repoTestContext.xml"})
+//@ActiveProfiles("dev")
 public class RepositoryTestConfig {
     
 }
