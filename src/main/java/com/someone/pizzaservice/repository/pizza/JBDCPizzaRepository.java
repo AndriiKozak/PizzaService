@@ -19,18 +19,18 @@ import org.springframework.stereotype.Repository;
  *
  * @author akozak
  */
-//@Repository("PizzaRepository")
+@Repository("PizzaRepository")
 public class JBDCPizzaRepository implements PizzaRepository{
     private JdbcTemplate jdbcTemplate;
 
- //   @Autowired
+    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
     
     @Override
     public Pizza getPizzaByID(Integer id) {
-        final String stmt="select id, pizza_name, price, pizza_type form pizzas whrere id=?;";
+        final String stmt="select id, pizza_name, price, pizza_type from pizzaservice.pizzas where id=?;";
         return jdbcTemplate.queryForObject(stmt, new PizzaMapper(), id);
     }
     private static final class PizzaMapper implements RowMapper<Pizza> {

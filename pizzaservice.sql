@@ -10,20 +10,20 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema pizzasevice
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `pizzasevice` ;
+DROP SCHEMA IF EXISTS `pizzaservice` ;
 
 -- -----------------------------------------------------
 -- Schema pizzasevice
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `pizzasevice` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `pizzaservice` DEFAULT CHARACTER SET utf8 ;
 USE `pizzasevice` ;
 
 -- -----------------------------------------------------
 -- Table `pizzasevice`.`pizzas`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `pizzasevice`.`pizzas` ;
+DROP TABLE IF EXISTS `pizzaservice`.`pizzas` ;
 
-CREATE TABLE IF NOT EXISTS `pizzasevice`.`pizzas` (
+CREATE TABLE IF NOT EXISTS `pizzaservice`.`pizzas` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `pizza_name` VARCHAR(45) NULL,
   `price` DOUBLE NULL,
@@ -41,9 +41,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `pizzasevice`;
-INSERT INTO `pizzasevice`.`pizzas` (`id`, `pizza_name`, `price`, `pizza_type`) VALUES (1, 'pizza1', 12.4, 'Meat');
-INSERT INTO `pizzasevice`.`pizzas` (`id`, `pizza_name`, `price`, `pizza_type`) VALUES (2, 'pizza2', 24.4, 'Vegeterian');
-INSERT INTO `pizzasevice`.`pizzas` (`id`, `pizza_name`, `price`, `pizza_type`) VALUES (3, 'pizza3', 22.5, 'Sea');
+INSERT INTO `pizzaservice`.`pizzas` (`id`, `pizza_name`, `price`, `pizza_type`) VALUES (1, 'pizza1', 12.4, 'Meat');
+INSERT INTO `pizzaservice`.`pizzas` (`id`, `pizza_name`, `price`, `pizza_type`) VALUES (2, 'pizza2', 24.4, 'Vegeterian');
+INSERT INTO `pizzaservice`.`pizzas` (`id`, `pizza_name`, `price`, `pizza_type`) VALUES (3, 'pizza3', 22.5, 'Sea');
 
 COMMIT;
 

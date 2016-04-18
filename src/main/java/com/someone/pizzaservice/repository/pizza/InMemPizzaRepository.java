@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author Andrii_Kozak1
  */
-@Repository("pizzaRepository")
+//@Repository("pizzaRepository")
 public class InMemPizzaRepository implements PizzaRepository {
 
     private List<Pizza> pizzas = new ArrayList<Pizza>();

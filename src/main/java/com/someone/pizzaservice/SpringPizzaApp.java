@@ -37,7 +37,7 @@ public class SpringPizzaApp {
 
         customer.setName("Andrii");
         customer.setAdress(new Address("Geroyev Stalingrada 20a, fl 323"));
-        Order order = orderService.placeNewOrder(customer, 0, 1, 2);
+        Order order = orderService.placeNewOrder(customer, 1, 2, 3);
         System.out.println(order);
 
         appContext.close();
