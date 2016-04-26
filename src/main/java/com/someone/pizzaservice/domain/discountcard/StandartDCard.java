@@ -18,13 +18,14 @@ import javax.persistence.Table;
  * @author Andrii_Kozak1
  */
 @Entity
-@Table(name="DCards")
+@Table(name = "DCards")
 public class StandartDCard implements DCard, Serializable {
 
     // This class do calculate dicouts for customers with dicount card, since 
     // it has all nessesary infomation to do this, in order to implement single
     // responsibility principle.
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private double total = 0;
     final static double PERCENTAGE_OF_TOTAL_TO_DISCOUNT = 0.1;

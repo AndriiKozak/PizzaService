@@ -24,10 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author Andrii_Kozak1
  */
+public class SimpleOrderServiceTest extends RepositoryTestConfig {
 
-public class SimpleOrderServiceTest extends RepositoryTestConfig
-{
-   @Autowired
+    @Autowired
 //    InMemPizzaRepository imps = new InMemPizzaRepository();
 //    {imps.cookPizzas();}
     OrderService orderService;//=new SimpleOrderService(new InMemOrderRepository(),imps);

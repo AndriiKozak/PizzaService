@@ -16,14 +16,16 @@ import javax.persistence.Table;
  * @author Andrii_Kozak1
  */
 @Entity
-@Table(name="Addresses")
+@Table(name = "Addresses")
 public class Address {
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String address;
-    
-    public Address(){
-        this.address="";
+
+    public Address() {
+        this.address = "";
     }
 
     public Address(String address) {

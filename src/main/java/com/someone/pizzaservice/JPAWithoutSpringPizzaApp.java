@@ -9,8 +9,10 @@ import com.someone.pizzaservice.domain.customer.Address;
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.discountcard.StandartDCard;
 import com.someone.pizzaservice.domain.order.Order;
-import com.someone.pizzaservice.domain.pizza.Pizza;
-import com.someone.pizzaservice.domain.pizza.PizzaType;
+import com.someone.pizzaservice.repository.order.JPAOrderRepository;
+import com.someone.pizzaservice.repository.pizza.JPAPizzaRepository;
+import com.someone.pizzaservice.service.order.OrderService;
+import com.someone.pizzaservice.service.order.SimpleOrderService;
 import java.util.Arrays;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,9 +20,9 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author akozak
+ * @author Andrii_Kozak1
  */
-public class JPAWithoutSpring {
+public class JPAWithoutSpringPizzaApp {
 
     /**
      * @param args the command line arguments
@@ -28,31 +30,28 @@ public class JPAWithoutSpring {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
         EntityManager em = emf.createEntityManager();
-        Pizza pizza = new Pizza();
-        pizza.setName("Margo");
-        pizza.setPrice(120.3);
-        pizza.setType(PizzaType.Sea);
+        JPAPizzaRepository pizzaRepository = new JPAPizzaRepository(em);
+        pizzaRepository.cookPizzas();
+        JPAOrderRepository orderRepository = new JPAOrderRepository(em);
+        OrderService orderService = new SimpleOrderService(orderRepository, pizzaRepository);
+
         Customer customer = new Customer();
-        customer.setName("Man from main");
-        Address address = new Address("Main :)");
+        customer.setName("Man from JPAWS Pizza App");
+        Address address = new Address("JPAWS Pizza App");
         StandartDCard dCard = new StandartDCard();
         dCard.setTotal(1000.0);
         customer.setDCard(dCard);
         customer.setAddress(Arrays.asList(address));
-
+        Order order;
         try {
             em.getTransaction().begin();
-            em.persist(customer);
-            em.persist(pizza);
-            Order order = new Order(customer, Arrays.asList(pizza));
-            em.persist(order);
+            order = orderService.placeNewOrder(customer, 1, 2, 3);
             em.getTransaction().commit();
-            Pizza p = em.find(Pizza.class, 2L);
-            System.out.println(p);
         } finally {
             em.close();
             emf.close();
-        };
+        }
+        System.out.println(order);
     }
 
 }

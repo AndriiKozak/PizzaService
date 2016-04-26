@@ -48,16 +48,17 @@ public class Order {
         ALLOWED_TRANSITIONS.add(new Transition(OrderState.NEW, OrderState.IN_PROGRESS));
         ALLOWED_TRANSITIONS.add(new Transition(OrderState.IN_PROGRESS, OrderState.DONE));
     }
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     @Enumerated(EnumType.STRING)
     private OrderState state;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Customer customer;
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="Pizzas_in_order",
-            joinColumns =@JoinColumn(name= "order_id"),
-            inverseJoinColumns =@JoinColumn(name= "pizza_id"))
+    @JoinTable(name = "Pizzas_in_order",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "pizza_id"))
     private List<Pizza> pizzaList;
 
     public Order() {

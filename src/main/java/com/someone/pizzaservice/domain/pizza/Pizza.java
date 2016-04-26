@@ -18,17 +18,20 @@ import javax.persistence.Table;
  * @author Andrii_Kozak1
  */
 @Entity
-@Table(name="pizzas")
+@Table(name = "pizzas")
 public class Pizza {
-    @Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    private long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
     private String name;
     private Double price;
     @Enumerated(EnumType.STRING)
     private PizzaType type;
 
-    
-    public Pizza(){}
+    public Pizza() {
+    }
+
     public Pizza(int id, String name, Double price, PizzaType type) {
         this.name = name;
         this.price = price;
@@ -36,17 +39,23 @@ public class Pizza {
         this.id = id;
     }
 
+    public Pizza(String name, Double price, PizzaType type) {
+        this.name = name;
+        this.price = price;
+        this.type = type;
+    }
+
     /**
      * @return the id
      */
-    public long getId() {
+    public int getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

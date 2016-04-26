@@ -28,22 +28,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 //@Domain
 //@Scope("prototype")
 @Entity
-@Table(name="Customers")
+@Table(name = "Customers")
 public class Customer implements FactoryBean<Customer> {
 
-
-
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String name;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_customer")
+    @JoinColumn(name = "id_customer")
     private List<Address> addresses;
     @OneToOne(targetEntity = StandartDCard.class, cascade = CascadeType.ALL)
     private DCard dCard;
 
     public Customer() {
-        dCard=NoCard.getInstance();
+        dCard = NoCard.getInstance();
     }
 
     public Customer(String name, List<Address> addresses) {
@@ -119,6 +118,7 @@ public class Customer implements FactoryBean<Customer> {
     public void setdCard(DCard dCard) {
         this.dCard = dCard;
     }
+
     @Override
     public Customer getObject() throws Exception {
         return new Customer();

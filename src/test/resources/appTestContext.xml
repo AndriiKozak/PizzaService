@@ -9,6 +9,6 @@
     <context:component-scan base-package="com.someone.pizzaservice.service, com.someone.pizzaservice.domain">
         <context:include-filter type="annotation" expression="com.someone.pizzaservice.infrastructure.Domain"/>
     </context:component-scan>
- <bean class="com.someone.pizzaservice.domain.customer.Customer"></bean>                       
+    <bean class="com.someone.pizzaservice.domain.customer.Customer"></bean>                       
     <bean class="com.someone.pizzaservice.infrastructure.BenchmarkProxyBeanPostprocessor"></bean> 
 </beans>
