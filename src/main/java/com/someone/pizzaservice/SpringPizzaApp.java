@@ -7,11 +7,9 @@ package com.someone.pizzaservice;
 
 import com.someone.pizzaservice.domain.customer.Address;
 import com.someone.pizzaservice.domain.customer.Customer;
-import com.someone.pizzaservice.domain.discountcard.DCard;
 import com.someone.pizzaservice.domain.order.Order;
-import com.someone.pizzaservice.repository.order.OrderRepository;
-import com.someone.pizzaservice.repository.pizza.PizzaRepository;
 import com.someone.pizzaservice.service.order.OrderService;
+import java.util.Arrays;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -36,7 +34,7 @@ public class SpringPizzaApp {
         Customer customer = appContext.getBean(Customer.class);
 
         customer.setName("Andrii");
-        customer.setAdress(new Address("Geroyev Stalingrada 20a, fl 323"));
+        customer.setAddress(Arrays.asList(new Address("Geroyev Stalingrada 20a, fl 323")));
         Order order = orderService.placeNewOrder(customer, 1, 2, 3);
         System.out.println(order);
 

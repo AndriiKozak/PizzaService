@@ -5,13 +5,26 @@
  */
 package com.someone.pizzaservice.domain.customer;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author Andrii_Kozak1
  */
+@Entity
+@Table(name="Addresses")
 public class Address {
-
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
     private String address;
+    
+    public Address(){
+        this.address="";
+    }
 
     public Address(String address) {
         this.address = address;

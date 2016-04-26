@@ -13,6 +13,7 @@ import com.someone.pizzaservice.infrastructure.JavaConfigApplicationContext;
 import com.someone.pizzaservice.repository.order.OrderRepository;
 import com.someone.pizzaservice.repository.pizza.PizzaRepository;
 import com.someone.pizzaservice.service.order.OrderService;
+import java.util.Arrays;
 
 /**
  *
@@ -30,7 +31,7 @@ public class PizzaApp {
         OrderService orderService = (OrderService) ac.getBean("orderService");
 
         Customer customer
-                = new Customer("Andrii", new Address("Geroyev Stalingrada 20a, fl 323"));
+                = new Customer("Andrii",Arrays.asList(new Address("Geroyev Stalingrada 20a, fl 323")));
         Order order;
 
         order = orderService.placeNewOrder(customer, 0, 1, 2);

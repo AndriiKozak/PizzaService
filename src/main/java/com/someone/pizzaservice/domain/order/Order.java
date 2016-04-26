@@ -7,12 +7,23 @@ package com.someone.pizzaservice.domain.order;
 
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.pizza.Pizza;
-import com.someone.pizzaservice.infrastructure.Benchmark;
 import com.someone.pizzaservice.infrastructure.Domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import org.springframework.context.annotation.Scope;
 
 /**
@@ -21,6 +32,8 @@ import org.springframework.context.annotation.Scope;
  */
 @Domain
 @Scope("prototype")
+@Entity
+@Table(name = "Orders")
 public class Order {
 
     static final Set<Transition> ALLOWED_TRANSITIONS = new HashSet<>();
@@ -35,17 +48,22 @@ public class Order {
         ALLOWED_TRANSITIONS.add(new Transition(OrderState.NEW, OrderState.IN_PROGRESS));
         ALLOWED_TRANSITIONS.add(new Transition(OrderState.IN_PROGRESS, OrderState.DONE));
     }
-    private static int sId = 0;
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
+    @Enumerated(EnumType.STRING)
     private OrderState state;
+    @OneToOne
     private Customer customer;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="Pizzas_in_order",
+            joinColumns =@JoinColumn(name= "order_id"),
+            inverseJoinColumns =@JoinColumn(name= "pizza_id"))
     private List<Pizza> pizzaList;
 
     public Order() {
     }
 
     public Order(Customer customer, List<Pizza> pizzaList) {
-        id = sId++;
         state = OrderState.NEW;
         this.customer = customer;
         this.pizzaList = pizzaList;

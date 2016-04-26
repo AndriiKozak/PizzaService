@@ -6,6 +6,8 @@
 package com.someone.pizzaservice.domain.discountcard;
 
 import com.someone.pizzaservice.domain.order.Order;
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 
 /**
  *

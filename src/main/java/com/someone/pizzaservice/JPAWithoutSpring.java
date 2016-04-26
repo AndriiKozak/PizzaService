@@ -5,8 +5,13 @@
  */
 package com.someone.pizzaservice;
 
+import com.someone.pizzaservice.domain.customer.Address;
+import com.someone.pizzaservice.domain.customer.Customer;
+import com.someone.pizzaservice.domain.discountcard.StandartDCard;
+import com.someone.pizzaservice.domain.order.Order;
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.domain.pizza.PizzaType;
+import java.util.Arrays;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -24,13 +29,23 @@ public class JPAWithoutSpring {
        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
        EntityManager em=emf.createEntityManager();
        Pizza pizza=new Pizza();
-       pizza.setId(2L);
        pizza.setName("Margo");
        pizza.setPrice(120.3);
        pizza.setType(PizzaType.Sea);
+       Customer customer=new Customer();
+       customer.setName("Man from main");
+       Address address=new Address("Main :)");
+       StandartDCard dCard = new StandartDCard();
+       dCard.setTotal(1000.0);
+       customer.setDCard(dCard);
+       customer.setAddress(Arrays.asList(address));
+       
        try{
            em.getTransaction().begin();
-           //em.persist(pizza);
+           em.persist(customer);
+           em.persist(pizza);
+           Order order=new Order(customer,Arrays.asList(pizza));
+           em.persist(order);
            em.getTransaction().commit();
            Pizza p= em.find(Pizza.class, 2L);
            System.out.println(p);

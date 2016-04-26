@@ -5,24 +5,26 @@
  */
 package com.someone.pizzaservice.domain.pizza;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Andrii_Kozak1
  */
 @Entity
+@Table(name="pizzas")
 public class Pizza {
-    @Id 
+    @Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private long id;
     private String name;
     private Double price;
     @Enumerated(EnumType.STRING)
-    @Column(name="pizzatype")
     private PizzaType type;
 
     

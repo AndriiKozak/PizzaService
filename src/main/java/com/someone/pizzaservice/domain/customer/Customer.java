@@ -6,7 +6,18 @@
 package com.someone.pizzaservice.domain.customer;
 
 import com.someone.pizzaservice.domain.discountcard.DCard;
-import com.someone.pizzaservice.infrastructure.Benchmark;
+import com.someone.pizzaservice.domain.discountcard.NoCard;
+import com.someone.pizzaservice.domain.discountcard.StandartDCard;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,36 +27,28 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 //@Domain
 //@Scope("prototype")
+@Entity
+@Table(name="Customers")
 public class Customer implements FactoryBean<Customer> {
 
-    @Override
-    public Customer getObject() throws Exception {
-        return new Customer();
-    }
 
-    @Override
-    public Class<?> getObjectType() {
-        return Customer.class;
-    }
 
-    @Override
-    public boolean isSingleton() {
-        return false;
-    }
-
-    private static int sId = 0;
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) 
     private int id;
     private String name;
-    private Address address;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_customer")
+    private List<Address> addresses;
+    @OneToOne(targetEntity = StandartDCard.class, cascade = CascadeType.ALL)
     private DCard dCard;
 
     public Customer() {
+        dCard=NoCard.getInstance();
     }
 
-    public Customer(String name, Address adress) {
-        this.id = sId++;
+    public Customer(String name, List<Address> addresses) {
         this.name = name;
-        this.address = adress;
+        this.addresses = addresses;
     }
 
     public void setName(String name) {
@@ -70,22 +73,22 @@ public class Customer implements FactoryBean<Customer> {
         return "Customer{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", address='" + address + '\''
+                + ", address='" + addresses + '\''
                 + '}';
     }
 
     /**
      * @return the address
      */
-    public Address getAddress() {
-        return address;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
     /**
      * @param adress the adress to set
      */
-    public void setAdress(Address address) {
-        this.address = address;
+    public void setAddress(List<Address> addresses) {
+        this.addresses = addresses;
     }
 
     /**
@@ -115,5 +118,19 @@ public class Customer implements FactoryBean<Customer> {
      */
     public void setdCard(DCard dCard) {
         this.dCard = dCard;
+    }
+    @Override
+    public Customer getObject() throws Exception {
+        return new Customer();
+    }
+
+    @Override
+    public Class<?> getObjectType() {
+        return Customer.class;
+    }
+
+    @Override
+    public boolean isSingleton() {
+        return false;
     }
 }
