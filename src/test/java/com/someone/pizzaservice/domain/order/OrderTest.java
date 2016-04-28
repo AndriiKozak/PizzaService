@@ -8,6 +8,7 @@ package com.someone.pizzaservice.domain.order;
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import java.util.List;
+import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,7 +44,7 @@ public class OrderTest {
     @Test(expected = RuntimeException.class)
     public void testSetState() {
         Customer customer = mock(Customer.class);
-        List<Pizza> pizzaList = mock(List.class);
+        Map<Pizza,Integer> pizzaList = mock(Map.class);
         Order order = new Order(customer, pizzaList);
         order.setState(OrderState.DONE);
     }

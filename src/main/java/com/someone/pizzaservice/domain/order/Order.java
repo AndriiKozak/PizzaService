@@ -9,10 +9,13 @@ import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.infrastructure.Domain;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,8 +23,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.springframework.context.annotation.Scope;
@@ -55,19 +57,23 @@ public class Order {
     private OrderState state;
     @OneToOne(cascade = CascadeType.ALL)
     private Customer customer;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Pizzas_in_order",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "pizza_id"))
-    private List<Pizza> pizzaList;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "Pizzas_in_order",
+//            joinColumns = @JoinColumn(name = "order_id"),
+//            inverseJoinColumns = @JoinColumn(name = "pizza_id"))
+    @ElementCollection
+    @CollectionTable(name="Pizzas_in_order", joinColumns = @JoinColumn(name = "order_id"))
+    @MapKeyJoinColumn(name="pizza_id")
+    @Column(name="count")
+    private Map<Pizza,Integer> pizzaCountMap;
 
     public Order() {
     }
 
-    public Order(Customer customer, List<Pizza> pizzaList) {
+    public Order(Customer customer, Map<Pizza,Integer> pizzaCountMap) {
         state = OrderState.NEW;
         this.customer = customer;
-        this.pizzaList = pizzaList;
+        this. pizzaCountMap =  pizzaCountMap;
     }
 
     public Double calculateTotalCost() {
@@ -91,21 +97,21 @@ public class Order {
     /**
      * @return the pizzaList
      */
-    public List<Pizza> getPizzaList() {
-        return pizzaList;
+    public Map<Pizza,Integer> getPizzaCountMap() {
+        return pizzaCountMap;
     }
 
     /**
      * @param pizzaList the pizzaList to set
      */
-    public void setPizzaList(List<Pizza> pizzaList) {
-        this.pizzaList = pizzaList;
+    public void setPizzaCountMap(Map<Pizza,Integer> pizzaCountMap) {
+        this.pizzaCountMap = pizzaCountMap;
     }
 
     public String toString() {
         return "Order{"
                 + "customer=" + getCustomer()
-                + ", pizza=" + pizzaList
+                + ", pizza=" + pizzaCountMap
                 + ", state=" + getState()
                 + '}';
     }

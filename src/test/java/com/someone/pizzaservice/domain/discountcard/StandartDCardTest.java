@@ -9,8 +9,8 @@ import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.order.Order;
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.domain.pizza.PizzaType;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
  */
 public class StandartDCardTest {
 
-    List<Pizza> pizzas;
+    Map<Pizza,Integer> pizzas;
 
     public StandartDCardTest() {
     }
@@ -41,12 +41,12 @@ public class StandartDCardTest {
 
     @Before
     public void setUp() {
-        pizzas = new ArrayList<>();
+        pizzas = new HashMap<Pizza,Integer>();
 
         {
-            pizzas.add(new Pizza(1, "Pizza1", 12.4, PizzaType.Meat));
-            pizzas.add(new Pizza(2, "Pizza2", 24.4, PizzaType.Vegeterian));
-            pizzas.add(new Pizza(3, "Pizza3", 22.5, PizzaType.Sea));
+            pizzas.put(new Pizza(1, "Pizza1test", 12.4, PizzaType.Meat),1);
+            pizzas.put(new Pizza(2, "Pizza2test", 24.4, PizzaType.Vegeterian),1);
+            pizzas.put(new Pizza(3, "Pizza3test", 22.5, PizzaType.Sea),1);
         }
     }
 
@@ -64,7 +64,7 @@ public class StandartDCardTest {
         instance.setTotal(100500.0);
         Order order = mock(Order.class);
         Customer customer = mock(Customer.class);
-        when(order.getPizzaList()).thenReturn(pizzas);
+        when(order.getPizzaCountMap()).thenReturn(pizzas);
         when(order.getCustomer()).thenReturn(customer);
         when(customer.getDCard()).thenReturn(instance);
         double expResult = 0.7 * (12.4 + 24.4 + 22.5);
@@ -79,7 +79,7 @@ public class StandartDCardTest {
         instance.setTotal(100);
         Order order = mock(Order.class);
         Customer customer = mock(Customer.class);
-        when(order.getPizzaList()).thenReturn(pizzas);
+        when(order.getPizzaCountMap()).thenReturn(pizzas);
         when(order.getCustomer()).thenReturn(customer);
         when(customer.getDCard()).thenReturn(instance);
         double expResult = 12.4 + 24.4 + 22.5 - 0.1 * 100;
@@ -95,7 +95,7 @@ public class StandartDCardTest {
         StandartDCard instance = new StandartDCard();
         System.out.println("addToAccount");
         Order order = mock(Order.class);
-        when(order.getPizzaList()).thenReturn(pizzas);
+        when(order.getPizzaCountMap()).thenReturn(pizzas);
         instance.addToAccount(order);
         double expResult = 12.4 + 24.4 + 22.5;
         double result = instance.getTotal();

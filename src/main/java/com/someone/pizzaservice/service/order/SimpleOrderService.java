@@ -8,12 +8,12 @@ package com.someone.pizzaservice.service.order;
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.order.Order;
 import com.someone.pizzaservice.domain.pizza.Pizza;
-import com.someone.pizzaservice.infrastructure.Benchmark;
 import com.someone.pizzaservice.infrastructure.ServiceLocator;
 import com.someone.pizzaservice.repository.order.OrderRepository;
 import com.someone.pizzaservice.repository.pizza.PizzaRepository;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.stereotype.Service;
@@ -40,16 +40,17 @@ public class SimpleOrderService implements OrderService {
     @Override
     //  @Benchmark
     public Order placeNewOrder(Customer customer, Integer... pizzasID) {
-        List<Pizza> pizzas = pizzasByArrOfId(pizzasID);
-        if (pizzas.size() > MAX_ORDER_SIZE) {
+        
+        Map<Pizza,Integer> pizzaCountMap = pizzasByArrOfId(pizzasID);
+        if (pizzasID.length > MAX_ORDER_SIZE) {
             throw new RuntimeException("Order size exceed order upper limit");
         }
-        if (pizzas.size() < MIN_ORDER_SIZE) {
+        if (pizzasID.length < MIN_ORDER_SIZE) {
             throw new RuntimeException("Order is less than minimal limit");
         }
         Order newOrder = createOrder();
         newOrder.setCustomer(customer);
-        newOrder.setPizzaList(pizzas);
+        newOrder.setPizzaCountMap(pizzaCountMap);
         orderRepository.saveOrder(newOrder);  // set Entity.Order Id and save Entity.Order to in-memory list
         return newOrder;
     }
@@ -60,13 +61,20 @@ public class SimpleOrderService implements OrderService {
         return new Order(null, null);
     }
 
-    private List<Pizza> pizzasByArrOfId(Integer[] pizzasID) {
-        List<Pizza> pizzas = new ArrayList<>();
-
+    private Map<Pizza,Integer> pizzasByArrOfId(Integer[] pizzasID) {
+        Map<Pizza,Integer> pizzaCountMap = new HashMap<>();
+        Pizza pizza; int count;
         for (Integer id : pizzasID) {
-            pizzas.add(pizzaRepository.getPizzaByID(id));
+            pizza=pizzaRepository.getPizzaByID(id);
+            if (pizzaCountMap.containsKey(pizza)){
+                count=pizzaCountMap.get(pizza)+1;
+                pizzaCountMap.remove(pizza);
+                pizzaCountMap.put(pizza,count);
+            } else {
+                pizzaCountMap.put(pizza, 1);
+            }
         }
-        return pizzas;
+        return pizzaCountMap;
     }
 
 }
