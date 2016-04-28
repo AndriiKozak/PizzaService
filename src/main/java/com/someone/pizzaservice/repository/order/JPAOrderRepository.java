@@ -6,7 +6,7 @@
 package com.someone.pizzaservice.repository.order;
 
 import com.someone.pizzaservice.domain.order.Order;
-import javax.persistence.EntityManager;
+import com.someone.pizzaservice.repository.EMPlaceholder;
 
 /**
  *
@@ -14,15 +14,15 @@ import javax.persistence.EntityManager;
  */
 public class JPAOrderRepository implements OrderRepository {
 
-    EntityManager em;
+    EMPlaceholder emPlaceholder;
 
-    public JPAOrderRepository(EntityManager em) {
-        this.em = em;
+    public JPAOrderRepository(EMPlaceholder emPlaceholder) {
+        this.emPlaceholder = emPlaceholder;
     }
 
     @Override
     public Long saveOrder(Order order) {
-        em.persist(order);
+        emPlaceholder.em.persist(order);
         return order.getId();
     }
 

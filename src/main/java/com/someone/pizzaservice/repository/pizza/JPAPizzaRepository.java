@@ -7,6 +7,7 @@ package com.someone.pizzaservice.repository.pizza;
 
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.domain.pizza.PizzaType;
+import com.someone.pizzaservice.repository.EMPlaceholder;
 import javax.persistence.EntityManager;
 
 /**
@@ -15,24 +16,24 @@ import javax.persistence.EntityManager;
  */
 public class JPAPizzaRepository implements PizzaRepository {
 
-    EntityManager em;
+    EMPlaceholder emPlaceholder;
 
-    public JPAPizzaRepository(EntityManager em) {
-        this.em = em;
+    public JPAPizzaRepository(EMPlaceholder emPlaceholder) {
+        this.emPlaceholder = emPlaceholder;
     }
 
     @Override
     public Pizza getPizzaByID(Integer id) {
-        Pizza pizza = em.find(Pizza.class, id);
+        Pizza pizza = emPlaceholder.em.find(Pizza.class, id);
         return pizza;
     }
 
     public void cookPizzas() {
-        em.getTransaction().begin();
-        em.persist(new Pizza("Pizza1", 12.4, PizzaType.Meat));
-        em.persist(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian));
-        em.persist(new Pizza("Pizza3", 22.5, PizzaType.Sea));
-        em.getTransaction().commit();
+        emPlaceholder.em.getTransaction().begin();
+        emPlaceholder.em.persist(new Pizza("Pizza1", 12.4, PizzaType.Meat));
+        emPlaceholder.em.persist(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian));
+        emPlaceholder.em.persist(new Pizza("Pizza3", 22.5, PizzaType.Sea));
+        emPlaceholder.em.getTransaction().commit();
     }
 
 }

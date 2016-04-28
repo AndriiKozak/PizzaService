@@ -9,6 +9,7 @@ import com.someone.pizzaservice.domain.customer.Address;
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.discountcard.StandartDCard;
 import com.someone.pizzaservice.domain.order.Order;
+import com.someone.pizzaservice.repository.EMPlaceholder;
 import com.someone.pizzaservice.repository.order.JPAOrderRepository;
 import com.someone.pizzaservice.repository.pizza.JPAPizzaRepository;
 import com.someone.pizzaservice.service.order.OrderService;
@@ -30,11 +31,14 @@ public class JPAWithoutSpringPizzaApp {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
         EntityManager em = emf.createEntityManager();
-        JPAPizzaRepository pizzaRepository = new JPAPizzaRepository(em);
+        EMPlaceholder emPlaceholder = new EMPlaceholder();
+        JPAPizzaRepository pizzaRepository = new JPAPizzaRepository(emPlaceholder);
+        emPlaceholder.em=em;
         pizzaRepository.cookPizzas();
-        JPAOrderRepository orderRepository = new JPAOrderRepository(em);
+        
+        JPAOrderRepository orderRepository = new JPAOrderRepository(emPlaceholder);
         OrderService orderService = new SimpleOrderService(orderRepository, pizzaRepository);
-
+        em.close();
         Customer customer = new Customer();
         customer.setName("Man from JPAWS Pizza App");
         Address address = new Address("JPAWS Pizza App");
@@ -44,11 +48,12 @@ public class JPAWithoutSpringPizzaApp {
         customer.setAddress(Arrays.asList(address));
         Order order;
         try {
-            em.getTransaction().begin();
+            emPlaceholder.em=emf.createEntityManager();
+            emPlaceholder.em.getTransaction().begin();
             order = orderService.placeNewOrder(customer, 1, 2, 3);
-            em.getTransaction().commit();
+            emPlaceholder.em.getTransaction().commit();
         } finally {
-            em.close();
+            emPlaceholder.em.close();
             emf.close();
         }
         System.out.println(order);
