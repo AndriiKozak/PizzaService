@@ -36,4 +36,12 @@ public class JPAPizzaRepository implements PizzaRepository {
         emPlaceholder.em.getTransaction().commit();
     }
 
+    @Override
+    public Pizza createPizza(Pizza pizza) {
+        emPlaceholder.em.getTransaction().begin();
+        emPlaceholder.em.persist(pizza);
+        emPlaceholder.em.getTransaction().commit();
+        return pizza;
+    }
+    
 }

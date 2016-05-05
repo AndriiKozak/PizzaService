@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author Andrii_Kozak1
  */
-@Repository("orderRepository")
+//@Repository("orderRepository")
 public class InMemOrderRepository implements OrderRepository {
 
     private List<Order> orders = new ArrayList<>();

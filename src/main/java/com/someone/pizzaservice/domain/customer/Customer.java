@@ -11,6 +11,7 @@ import com.someone.pizzaservice.domain.discountcard.StandartDCard;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,9 +34,9 @@ public class Customer implements FactoryBean<Customer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL /*,fetch = FetchType.EAGER */)
     @JoinColumn(name = "id_customer")
     private List<Address> addresses;
     @OneToOne(targetEntity = StandartDCard.class, cascade = CascadeType.ALL)
@@ -58,11 +59,11 @@ public class Customer implements FactoryBean<Customer> {
         return name;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Long getId() {
 
         return id;
     }

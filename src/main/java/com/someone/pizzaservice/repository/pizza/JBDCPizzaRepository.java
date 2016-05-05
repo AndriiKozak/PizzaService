@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author akozak
  */
-@Repository("PizzaRepository")
+//@Repository("PizzaRepository")
 public class JBDCPizzaRepository implements PizzaRepository {
 
     private JdbcTemplate jdbcTemplate;
@@ -45,5 +45,12 @@ public class JBDCPizzaRepository implements PizzaRepository {
             return new Pizza(id, name, price, pizzaType);
         }
     }
+
+    @Override
+    public Pizza createPizza(Pizza pizza) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 
 }

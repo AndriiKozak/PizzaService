@@ -52,7 +52,7 @@ public class Order {
     }
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
     @Enumerated(EnumType.STRING)
     private OrderState state;
     @OneToOne(cascade = CascadeType.ALL)
@@ -83,14 +83,14 @@ public class Order {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -127,7 +127,7 @@ public class Order {
      * @param state the state to set
      */
     public void setState(OrderState state) {
-        if (ALLOWED_TRANSITIONS.contains(new Transition(this.state, state))) {
+        if ((this.state==null)||(ALLOWED_TRANSITIONS.contains(new Transition(this.state, state)))) {
             this.state = state;
         } else {
             throw new RuntimeException("Not allowed order state change");

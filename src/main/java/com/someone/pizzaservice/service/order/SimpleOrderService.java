@@ -7,6 +7,7 @@ package com.someone.pizzaservice.service.order;
 
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.order.Order;
+import com.someone.pizzaservice.domain.order.OrderState;
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.infrastructure.ServiceLocator;
 import com.someone.pizzaservice.repository.order.OrderRepository;
@@ -50,6 +51,7 @@ public class SimpleOrderService implements OrderService {
         }
         Order newOrder = createOrder();
         newOrder.setCustomer(customer);
+        newOrder.setState(OrderState.NEW);
         newOrder.setPizzaCountMap(pizzaCountMap);
         orderRepository.saveOrder(newOrder);  // set Entity.Order Id and save Entity.Order to in-memory list
         return newOrder;
