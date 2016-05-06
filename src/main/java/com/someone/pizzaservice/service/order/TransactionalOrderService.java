@@ -13,18 +13,19 @@ import com.someone.pizzaservice.infrastructure.ServiceLocator;
 import com.someone.pizzaservice.repository.order.OrderRepository;
 import com.someone.pizzaservice.repository.pizza.PizzaRepository;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Andrii_Kozak1
  */
-//@Service("orderService")
-public class SimpleOrderService implements OrderService {
+@Service("orderService")
+@Transactional
+public class TransactionalOrderService implements OrderService {
 
     public static final int MAX_ORDER_SIZE = 10;
     public static final int MIN_ORDER_SIZE = 1;
@@ -33,7 +34,7 @@ public class SimpleOrderService implements OrderService {
     private PizzaRepository pizzaRepository; //= (PizzaRepository)locator.lookup("PizzaRepository");
 
     @Autowired
-    public SimpleOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository) {
+    public TransactionalOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository) {
         this.pizzaRepository = pizzaRepository;
         this.orderRepository = orderRepository;
     }
@@ -80,3 +81,4 @@ public class SimpleOrderService implements OrderService {
     }
 
 }
+

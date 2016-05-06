@@ -9,6 +9,7 @@ import com.someone.pizzaservice.RepositoryTestConfig;
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.discountcard.NoCard;
 import com.someone.pizzaservice.domain.order.Order;
+import com.someone.pizzaservice.repository.order.InMemOrderRepository;
 import com.someone.pizzaservice.repository.pizza.InMemPizzaRepository;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,7 +19,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -26,10 +26,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class SimpleOrderServiceTest extends RepositoryTestConfig {
 
-    @Autowired
-//    InMemPizzaRepository imps = new InMemPizzaRepository();
-//    {imps.cookPizzas();}
-    OrderService orderService;//=new SimpleOrderService(new InMemOrderRepository(),imps);
+//    @Autowired
+    InMemPizzaRepository imps = new InMemPizzaRepository();
+    {imps.cookPizzas();}
+    OrderService orderService=new SimpleOrderService(new InMemOrderRepository(),imps);
 
     public SimpleOrderServiceTest() {
     }
