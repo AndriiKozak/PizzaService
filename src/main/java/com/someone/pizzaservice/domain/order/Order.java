@@ -62,18 +62,18 @@ public class Order {
 //            joinColumns = @JoinColumn(name = "order_id"),
 //            inverseJoinColumns = @JoinColumn(name = "pizza_id"))
     @ElementCollection
-    @CollectionTable(name="Pizzas_in_order", joinColumns = @JoinColumn(name = "order_id"))
-    @MapKeyJoinColumn(name="pizza_id")
-    @Column(name="count")
-    private Map<Pizza,Integer> pizzaCountMap;
+    @CollectionTable(name = "Pizzas_in_order", joinColumns = @JoinColumn(name = "order_id"))
+    @MapKeyJoinColumn(name = "pizza_id")
+    @Column(name = "count")
+    private Map<Pizza, Integer> pizzaCountMap;
 
     public Order() {
     }
 
-    public Order(Customer customer, Map<Pizza,Integer> pizzaCountMap) {
+    public Order(Customer customer, Map<Pizza, Integer> pizzaCountMap) {
         state = OrderState.NEW;
         this.customer = customer;
-        this. pizzaCountMap =  pizzaCountMap;
+        this.pizzaCountMap = pizzaCountMap;
     }
 
     public Double calculateTotalCost() {
@@ -97,14 +97,14 @@ public class Order {
     /**
      * @return the pizzaList
      */
-    public Map<Pizza,Integer> getPizzaCountMap() {
+    public Map<Pizza, Integer> getPizzaCountMap() {
         return pizzaCountMap;
     }
 
     /**
      * @param pizzaList the pizzaList to set
      */
-    public void setPizzaCountMap(Map<Pizza,Integer> pizzaCountMap) {
+    public void setPizzaCountMap(Map<Pizza, Integer> pizzaCountMap) {
         this.pizzaCountMap = pizzaCountMap;
     }
 
@@ -127,7 +127,7 @@ public class Order {
      * @param state the state to set
      */
     public void setState(OrderState state) {
-        if ((this.state==null)||(ALLOWED_TRANSITIONS.contains(new Transition(this.state, state)))) {
+        if ((this.state == null) || (ALLOWED_TRANSITIONS.contains(new Transition(this.state, state)))) {
             this.state = state;
         } else {
             throw new RuntimeException("Not allowed order state change");

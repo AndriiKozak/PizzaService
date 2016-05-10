@@ -14,5 +14,6 @@ import com.someone.pizzaservice.domain.pizza.Pizza;
 public interface PizzaRepository {
 
     Pizza getPizzaByID(Integer id);
+
     Pizza createPizza(Pizza pizza);
 }

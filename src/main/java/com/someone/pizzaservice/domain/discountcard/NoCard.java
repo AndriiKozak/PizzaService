@@ -37,12 +37,13 @@ public class NoCard implements DCard {
     @Override
     public double getDiscountedPrice(Order order) {
         Double res = 0.0;
-        int size=0; int count;
+        int size = 0;
+        int count;
         Double maxPrice = 0.0;
         for (Pizza pizza : order.getPizzaCountMap().keySet()) {
-            count=order.getPizzaCountMap().get(pizza);
-            res += count*pizza.getPrice();
-            size+=count;
+            count = order.getPizzaCountMap().get(pizza);
+            res += count * pizza.getPrice();
+            size += count;
             if (pizza.getPrice() > maxPrice) {
                 maxPrice = pizza.getPrice();
             }

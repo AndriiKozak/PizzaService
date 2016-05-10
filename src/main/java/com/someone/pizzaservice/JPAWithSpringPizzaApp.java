@@ -29,15 +29,15 @@ public class JPAWithSpringPizzaApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         ConfigurableApplicationContext repoContext = new ClassPathXmlApplicationContext(new String[]{"repositoryMySQLContext.xml"});
-         ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(new String[]{"appContext.xml"}, repoContext);
-         PizzaRepository pizzaRepository = (PizzaRepository)repoContext.getBean("SpringJDBCPizzaRepository");
-         OrderRepository orderRepository = (OrderRepository)repoContext.getBean("SpringJDBCOrderRepository");
-         int id1=pizzaRepository.createPizza(new Pizza("Pizza1", 12.4, PizzaType.Meat)).getId();
-         int id2=pizzaRepository.createPizza(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian)).getId();
-         int id3=pizzaRepository.createPizza(new Pizza("Pizza3", 22.5, PizzaType.Sea)).getId();
+        ConfigurableApplicationContext repoContext = new ClassPathXmlApplicationContext(new String[]{"repositoryMySQLContext.xml"});
+        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext(new String[]{"appContext.xml"}, repoContext);
+        PizzaRepository pizzaRepository = (PizzaRepository) repoContext.getBean("SpringJDBCPizzaRepository");
+        OrderRepository orderRepository = (OrderRepository) repoContext.getBean("SpringJDBCOrderRepository");
+        int id1 = pizzaRepository.createPizza(new Pizza("Pizza1", 12.4, PizzaType.Meat)).getId();
+        int id2 = pizzaRepository.createPizza(new Pizza("Pizza2", 24.4, PizzaType.Vegeterian)).getId();
+        int id3 = pizzaRepository.createPizza(new Pizza("Pizza3", 22.5, PizzaType.Sea)).getId();
 
-        OrderService orderService =(OrderService)appContext.getBean("orderService");
+        OrderService orderService = (OrderService) appContext.getBean("orderService");
         Customer customer = new Customer();
         customer.setName("Man from JPASpring Pizza App");
         Address address = new Address("JPASpring Pizza App");
@@ -48,10 +48,7 @@ public class JPAWithSpringPizzaApp {
         Order order = orderService.placeNewOrder(customer, id1, id2, id3);
         order = orderService.placeNewOrder(customer, id1, id2, id3);
         System.out.println(order);
-        
-    }
-      
 
-    
-    
+    }
+
 }

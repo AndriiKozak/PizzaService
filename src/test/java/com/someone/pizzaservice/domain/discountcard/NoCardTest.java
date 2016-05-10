@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
  */
 public class NoCardTest {
 
-    HashMap<Pizza,Integer> pizzas;
+    HashMap<Pizza, Integer> pizzas;
 
     public NoCardTest() {
     }
@@ -40,12 +40,12 @@ public class NoCardTest {
 
     @Before
     public void setUp() {
-        pizzas = new HashMap<Pizza,Integer>();
+        pizzas = new HashMap<Pizza, Integer>();
 
         {
-            pizzas.put(new Pizza(1, "Pizza1test", 12.4, PizzaType.Meat),1);
-            pizzas.put(new Pizza(2, "Pizza2test", 24.4, PizzaType.Vegeterian),1);
-            pizzas.put(new Pizza(3, "Pizza3test", 22.5, PizzaType.Sea),1);
+            pizzas.put(new Pizza(1, "Pizza1test", 12.4, PizzaType.Meat), 1);
+            pizzas.put(new Pizza(2, "Pizza2test", 24.4, PizzaType.Vegeterian), 1);
+            pizzas.put(new Pizza(3, "Pizza3test", 22.5, PizzaType.Sea), 1);
         }
     }
 
@@ -59,7 +59,7 @@ public class NoCardTest {
     @Test
     public void testGetDiscountedPriceBigOrder() {
         System.out.println("getDiscountedPrice");
-        pizzas.put(new Pizza(4, "TestExpensivePizza", 100500.0, PizzaType.Meat),1);
+        pizzas.put(new Pizza(4, "TestExpensivePizza", 100500.0, PizzaType.Meat), 1);
         Order order = mock(Order.class);
         when(order.getPizzaCountMap()).thenReturn(pizzas);
         NoCard instance = NoCard.getInstance();

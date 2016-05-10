@@ -33,9 +33,9 @@ public class JPAWithoutSpringPizzaApp {
         EntityManager em = emf.createEntityManager();
         EMPlaceholder emPlaceholder = new EMPlaceholder();
         JPAPizzaRepository pizzaRepository = new JPAPizzaRepository(emPlaceholder);
-        emPlaceholder.em=em;
+        emPlaceholder.em = em;
         pizzaRepository.cookPizzas();
-        
+
         JPAOrderRepository orderRepository = new JPAOrderRepository(emPlaceholder);
         OrderService orderService = new SimpleOrderService(orderRepository, pizzaRepository);
         em.close();
@@ -48,7 +48,7 @@ public class JPAWithoutSpringPizzaApp {
         customer.setAddress(Arrays.asList(address));
         Order order;
         try {
-            emPlaceholder.em=emf.createEntityManager();
+            emPlaceholder.em = emf.createEntityManager();
             emPlaceholder.em.getTransaction().begin();
             order = orderService.placeNewOrder(customer, 1, 2, 3);
             emPlaceholder.em.getTransaction().commit();

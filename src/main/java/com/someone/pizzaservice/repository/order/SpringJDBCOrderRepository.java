@@ -18,21 +18,22 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Repository("SpringJDBCOrderRepository")
-public class SpringJDBCOrderRepository implements OrderRepository{
+public class SpringJDBCOrderRepository implements OrderRepository {
+
     @PersistenceContext
     EntityManager em;
 
     @Override
     public Long saveOrder(Order order) {
-        Customer customer=order.getCustomer();
-        if (customer.getId()!=null) {
-         //   customer=em.find(Customer.class, customer.getId());
-         customer=em.merge(customer);
-          //  customer.getAddresses();
+        Customer customer = order.getCustomer();
+        if (customer.getId() != null) {
+            //   customer=em.find(Customer.class, customer.getId());
+            customer = em.merge(customer);
+            //  customer.getAddresses();
             order.setCustomer(customer);
         }
         em.persist(order);
         return order.getId();
     }
-    
+
 }

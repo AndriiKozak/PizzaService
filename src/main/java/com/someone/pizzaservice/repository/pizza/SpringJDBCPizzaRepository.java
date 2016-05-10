@@ -18,10 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository("SpringJDBCPizzaRepository")
 public class SpringJDBCPizzaRepository implements PizzaRepository {
+
     @PersistenceContext
     EntityManager em;
+
     @Override
-    
+
     public Pizza getPizzaByID(Integer id) {
         Pizza pizza = em.find(Pizza.class, id);
         return pizza;
@@ -32,5 +34,5 @@ public class SpringJDBCPizzaRepository implements PizzaRepository {
         em.persist(pizza);
         return pizza;
     }
-    
+
 }

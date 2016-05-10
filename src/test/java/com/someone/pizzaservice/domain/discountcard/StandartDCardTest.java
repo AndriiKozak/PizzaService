@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
  */
 public class StandartDCardTest {
 
-    Map<Pizza,Integer> pizzas;
+    Map<Pizza, Integer> pizzas;
 
     public StandartDCardTest() {
     }
@@ -41,12 +41,12 @@ public class StandartDCardTest {
 
     @Before
     public void setUp() {
-        pizzas = new HashMap<Pizza,Integer>();
+        pizzas = new HashMap<Pizza, Integer>();
 
         {
-            pizzas.put(new Pizza(1, "Pizza1test", 12.4, PizzaType.Meat),1);
-            pizzas.put(new Pizza(2, "Pizza2test", 24.4, PizzaType.Vegeterian),1);
-            pizzas.put(new Pizza(3, "Pizza3test", 22.5, PizzaType.Sea),1);
+            pizzas.put(new Pizza(1, "Pizza1test", 12.4, PizzaType.Meat), 1);
+            pizzas.put(new Pizza(2, "Pizza2test", 24.4, PizzaType.Vegeterian), 1);
+            pizzas.put(new Pizza(3, "Pizza3test", 22.5, PizzaType.Sea), 1);
         }
     }
 

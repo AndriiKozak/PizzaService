@@ -42,8 +42,8 @@ public class TransactionalOrderService implements OrderService {
     @Override
     //  @Benchmark
     public Order placeNewOrder(Customer customer, Integer... pizzasID) {
-        
-        Map<Pizza,Integer> pizzaCountMap = pizzasByArrOfId(pizzasID);
+
+        Map<Pizza, Integer> pizzaCountMap = pizzasByArrOfId(pizzasID);
         if (pizzasID.length > MAX_ORDER_SIZE) {
             throw new RuntimeException("Order size exceed order upper limit");
         }
@@ -64,15 +64,16 @@ public class TransactionalOrderService implements OrderService {
         return new Order(null, null);
     }
 
-    private Map<Pizza,Integer> pizzasByArrOfId(Integer[] pizzasID) {
-        Map<Pizza,Integer> pizzaCountMap = new HashMap<>();
-        Pizza pizza; int count;
+    private Map<Pizza, Integer> pizzasByArrOfId(Integer[] pizzasID) {
+        Map<Pizza, Integer> pizzaCountMap = new HashMap<>();
+        Pizza pizza;
+        int count;
         for (Integer id : pizzasID) {
-            pizza=pizzaRepository.getPizzaByID(id);
-            if (pizzaCountMap.containsKey(pizza)){
-                count=pizzaCountMap.get(pizza)+1;
+            pizza = pizzaRepository.getPizzaByID(id);
+            if (pizzaCountMap.containsKey(pizza)) {
+                count = pizzaCountMap.get(pizza) + 1;
                 pizzaCountMap.remove(pizza);
-                pizzaCountMap.put(pizza,count);
+                pizzaCountMap.put(pizza, count);
             } else {
                 pizzaCountMap.put(pizza, 1);
             }
@@ -81,4 +82,3 @@ public class TransactionalOrderService implements OrderService {
     }
 
 }
-

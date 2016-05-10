@@ -12,5 +12,6 @@ import javax.persistence.EntityManager;
  * @author Andrii_Kozak1
  */
 public class EMPlaceholder {
+
     public EntityManager em;
 }

@@ -46,8 +46,8 @@ public class JPAWithoutSpring {
             em.getTransaction().begin();
             em.persist(customer);
             em.persist(pizza);
-            Map<Pizza,Integer> pizzaCountMap =new HashMap<>();
-            pizzaCountMap.put(pizza,1);
+            Map<Pizza, Integer> pizzaCountMap = new HashMap<>();
+            pizzaCountMap.put(pizza, 1);
             Order order = new Order(customer, pizzaCountMap);
             em.persist(order);
             em.getTransaction().commit();

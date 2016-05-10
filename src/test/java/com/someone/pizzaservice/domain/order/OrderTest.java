@@ -44,7 +44,7 @@ public class OrderTest {
     @Test(expected = RuntimeException.class)
     public void testSetState() {
         Customer customer = mock(Customer.class);
-        Map<Pizza,Integer> pizzaList = mock(Map.class);
+        Map<Pizza, Integer> pizzaList = mock(Map.class);
         Order order = new Order(customer, pizzaList);
         order.setState(OrderState.DONE);
     }

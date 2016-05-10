@@ -19,7 +19,8 @@ import org.springframework.stereotype.Repository;
  */
 //@Repository("inMemPizzaRepository")
 public class InMemPizzaRepository implements PizzaRepository {
-    private int id=1;
+
+    private int id = 1;
     private List<Pizza> pizzas = new ArrayList<Pizza>();
 
     //@Benchmark(active = false
@@ -33,7 +34,7 @@ public class InMemPizzaRepository implements PizzaRepository {
         pizzas.add(new Pizza(1, "Pizza1", 12.4, PizzaType.Meat));
         pizzas.add(new Pizza(2, "Pizza2", 24.4, PizzaType.Vegeterian));
         pizzas.add(new Pizza(3, "Pizza3", 22.5, PizzaType.Sea));
-        id=4;
+        id = 4;
     }
 
     @Override
@@ -42,5 +43,5 @@ public class InMemPizzaRepository implements PizzaRepository {
         pizzas.add(pizza);
         return pizza;
     }
-    
+
 }

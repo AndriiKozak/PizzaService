@@ -28,8 +28,11 @@ public class SimpleOrderServiceTest extends RepositoryTestConfig {
 
 //    @Autowired
     InMemPizzaRepository imps = new InMemPizzaRepository();
-    {imps.cookPizzas();}
-    OrderService orderService=new SimpleOrderService(new InMemOrderRepository(),imps);
+
+    {
+        imps.cookPizzas();
+    }
+    OrderService orderService = new SimpleOrderService(new InMemOrderRepository(), imps);
 
     public SimpleOrderServiceTest() {
     }
