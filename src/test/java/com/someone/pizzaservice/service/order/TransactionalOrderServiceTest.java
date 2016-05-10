@@ -35,6 +35,7 @@ public class TransactionalOrderServiceTest extends H2RepositoryTestConfig {
     private int id1;
     private int id2;
     private int id3;
+    Pizza pizza1;
     
     public TransactionalOrderServiceTest()  {
     }
@@ -73,7 +74,8 @@ public class TransactionalOrderServiceTest extends H2RepositoryTestConfig {
         customer.setDCard(dCard);
         customer.setAddress(Arrays.asList(address));
         Order order = orderService.placeNewOrder(customer, id1, id2, id3);
-        assertEquals(true, true);
+        assertEquals(customer, order.getCustomer());
+        assertEquals(order.getPizzaCountMap().entrySet().size(),3);
         // TODO review the generated test code and remove the default call to fail.
         
     }
