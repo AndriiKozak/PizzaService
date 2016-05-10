@@ -15,4 +15,6 @@ import com.someone.pizzaservice.domain.order.Order;
 public interface OrderService {
 
     Order placeNewOrder(Customer customer, Integer... pizzasID);
+
+    Order proceed(Order order);
 }

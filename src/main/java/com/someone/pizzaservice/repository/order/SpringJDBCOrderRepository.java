@@ -36,4 +36,10 @@ public class SpringJDBCOrderRepository implements OrderRepository {
         return order.getId();
     }
 
+    @Override
+    public Order GetOrderById(long id) {
+        Order order = em.find(Order.class, id);
+        return order;
+    }
+
 }

@@ -58,6 +58,13 @@ public class TransactionalOrderService implements OrderService {
         return newOrder;
     }
 
+    @Override
+    public Order proceed(Order order) {
+        order = orderRepository.GetOrderById(order.getId());
+        order.setState(OrderState.IN_PROGRESS);
+        return order;
+    }
+
     //this method is overrided in OrderServiceBean. Here it realised only for test purposes;
     @Lookup
     protected Order createOrder() {

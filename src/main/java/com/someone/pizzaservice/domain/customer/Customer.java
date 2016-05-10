@@ -36,7 +36,7 @@ public class Customer implements FactoryBean<Customer> {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL /*,fetch = FetchType.EAGER */)
+    @OneToMany(cascade = CascadeType.ALL /*,fetch = FetchType.EAGER*/)
     @JoinColumn(name = "id_customer")
     private List<Address> addresses;
     @OneToOne(targetEntity = StandartDCard.class, cascade = CascadeType.ALL)

@@ -57,6 +57,11 @@ public class SimpleOrderService implements OrderService {
         return newOrder;
     }
 
+    @Override
+    public Order proceed(Order order) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     //this method is overrided in OrderServiceBean. Here it realised only for test purposes;
     @Lookup
     protected Order createOrder() {

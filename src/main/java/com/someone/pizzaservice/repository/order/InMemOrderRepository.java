@@ -25,4 +25,10 @@ public class InMemOrderRepository implements OrderRepository {
         orders.add(order);
         return order.getId();
     }
+
+    @Override
+    public Order GetOrderById(long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

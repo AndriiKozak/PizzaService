@@ -48,6 +48,8 @@ public class JPAWithSpringPizzaApp {
         Order order = orderService.placeNewOrder(customer, id1, id2, id3);
         order = orderService.placeNewOrder(customer, id1, id2, id3);
         System.out.println(order);
+        order = orderRepository.GetOrderById(order.getId());
+        // System.out.println(order);
 
     }
 

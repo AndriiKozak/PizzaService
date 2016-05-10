@@ -26,4 +26,9 @@ public class JPAOrderRepository implements OrderRepository {
         return order.getId();
     }
 
+    @Override
+    public Order GetOrderById(long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
