@@ -13,7 +13,7 @@ import com.someone.pizzaservice.domain.order.Order;
 import com.someone.pizzaservice.domain.order.OrderState;
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.domain.pizza.PizzaType;
-import com.someone.pizzaservice.repository.pizza.PizzaRepository;
+import com.someone.pizzaservice.service.pizza.PizzaService;
 import java.util.Arrays;
 import javax.sql.DataSource;
 import org.junit.After;
@@ -35,9 +35,8 @@ public class TransactionalOrderServiceTest extends H2RepositoryTestConfig {
 
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    PizzaRepository pizzaRepository;
-
+    //  @Autowired
+    //  PizzaService pizzaService;
     @Autowired
     OrderService orderService;
     private int id1 = 1;

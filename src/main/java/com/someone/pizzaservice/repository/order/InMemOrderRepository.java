@@ -27,7 +27,7 @@ public class InMemOrderRepository implements OrderRepository {
     }
 
     @Override
-    public Order GetOrderById(long id) {
+    public Order getOrderById(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

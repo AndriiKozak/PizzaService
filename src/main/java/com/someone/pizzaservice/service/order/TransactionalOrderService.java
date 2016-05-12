@@ -12,6 +12,7 @@ import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.infrastructure.ServiceLocator;
 import com.someone.pizzaservice.repository.order.OrderRepository;
 import com.someone.pizzaservice.repository.pizza.PizzaRepository;
+import com.someone.pizzaservice.service.pizza.PizzaService;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,11 @@ public class TransactionalOrderService implements OrderService {
     public static final int MIN_ORDER_SIZE = 1;
     ServiceLocator locator = ServiceLocator.getInstance();
     private OrderRepository orderRepository; //= (OrderRepository)locator.lookup("OrderRepository");
-    private PizzaRepository pizzaRepository; //= (PizzaRepository)locator.lookup("PizzaRepository");
+    private PizzaService pizzaService; //= (PizzaRepository)locator.lookup("PizzaRepository");
 
     @Autowired
-    public TransactionalOrderService(OrderRepository orderRepository, PizzaRepository pizzaRepository) {
-        this.pizzaRepository = pizzaRepository;
+    public TransactionalOrderService(OrderRepository orderRepository, PizzaService pizzaService) {
+        this.pizzaService = pizzaService;
         this.orderRepository = orderRepository;
     }
 
@@ -60,7 +61,7 @@ public class TransactionalOrderService implements OrderService {
 
     @Override
     public Order proceed(Order order) {
-        order = orderRepository.GetOrderById(order.getId());
+        order = orderRepository.getOrderById(order.getId());
         order.setState(OrderState.IN_PROGRESS);
         return order;
     }
@@ -76,7 +77,7 @@ public class TransactionalOrderService implements OrderService {
         Pizza pizza;
         int count;
         for (Integer id : pizzasID) {
-            pizza = pizzaRepository.getPizzaByID(id);
+            pizza = pizzaService.getPizzaByID(id);
             if (pizzaCountMap.containsKey(pizza)) {
                 count = pizzaCountMap.get(pizza) + 1;
                 pizzaCountMap.remove(pizza);

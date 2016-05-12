@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.someone.pizzaservice.repository.order;
+package com.someone.pizzaservice.service.pizza;
 
-import com.someone.pizzaservice.domain.order.Order;
+import com.someone.pizzaservice.domain.pizza.Pizza;
 
 /**
  *
  * @author Andrii_Kozak1
  */
-public interface OrderRepository {
+public interface PizzaService {
 
-    Long saveOrder(Order order);
+    Pizza getPizzaByID(Integer id);
 
-    Order getOrderById(long id);
+    Pizza createPizza(Pizza pizza);
 }
