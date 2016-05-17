@@ -8,13 +8,16 @@ package com.someone.pizzaservice.web.infrastructure;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
  * @author Andrii_Kozak1
  */
+@org.springframework.stereotype.Controller
 public class HelloController implements Controller {
 
+    @RequestMapping("/hello")
     @Override
     public void HandleRequest(HttpServletRequest req, HttpServletResponse resp) {
         try (PrintWriter out = resp.getWriter()) {
