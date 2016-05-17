@@ -9,6 +9,7 @@ import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.domain.pizza.PizzaType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -51,4 +52,9 @@ public class JBDCPizzaRepository implements PizzaRepository {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public List<Pizza> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

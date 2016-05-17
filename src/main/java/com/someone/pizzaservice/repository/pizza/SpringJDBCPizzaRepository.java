@@ -6,6 +6,7 @@
 package com.someone.pizzaservice.repository.pizza;
 
 import com.someone.pizzaservice.domain.pizza.Pizza;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -34,5 +35,8 @@ public class SpringJDBCPizzaRepository implements PizzaRepository {
         em.persist(pizza);
         return pizza;
     }
-
+    @Override
+    public List<Pizza> getAll() {
+    return em.createQuery("select p from Pizza p", Pizza.class).getResultList();
+ }
 }

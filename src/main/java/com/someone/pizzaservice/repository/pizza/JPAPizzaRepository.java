@@ -8,6 +8,7 @@ package com.someone.pizzaservice.repository.pizza;
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.domain.pizza.PizzaType;
 import com.someone.pizzaservice.repository.EMPlaceholder;
+import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
@@ -42,6 +43,11 @@ public class JPAPizzaRepository implements PizzaRepository {
         emPlaceholder.em.persist(pizza);
         emPlaceholder.em.getTransaction().commit();
         return pizza;
+    }
+
+    @Override
+    public List<Pizza> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

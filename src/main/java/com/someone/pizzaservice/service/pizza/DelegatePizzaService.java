@@ -7,6 +7,7 @@ package com.someone.pizzaservice.service.pizza;
 
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.repository.pizza.PizzaRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,5 +36,8 @@ public class DelegatePizzaService implements PizzaService {
     public Pizza createPizza(Pizza pizza) {
         return pizzaRepository.createPizza(pizza);
     }
-
+    @Override
+    public List<Pizza> getAll(){
+        return pizzaRepository.getAll();
+    }
 }

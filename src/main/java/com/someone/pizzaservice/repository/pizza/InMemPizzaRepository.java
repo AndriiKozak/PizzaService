@@ -44,4 +44,9 @@ public class InMemPizzaRepository implements PizzaRepository {
         return pizza;
     }
 
+    @Override
+    public List<Pizza> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

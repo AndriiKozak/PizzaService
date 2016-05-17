@@ -6,6 +6,7 @@
 package com.someone.pizzaservice.service.pizza;
 
 import com.someone.pizzaservice.domain.pizza.Pizza;
+import java.util.List;
 
 /**
  *
@@ -16,4 +17,6 @@ public interface PizzaService {
     Pizza getPizzaByID(Integer id);
 
     Pizza createPizza(Pizza pizza);
+    
+    List<Pizza> getAll();
 }

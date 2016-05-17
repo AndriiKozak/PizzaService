@@ -6,6 +6,7 @@
 package com.someone.pizzaservice.repository.pizza;
 
 import com.someone.pizzaservice.domain.pizza.Pizza;
+import java.util.List;
 
 /**
  *
@@ -16,4 +17,6 @@ public interface PizzaRepository {
     Pizza getPizzaByID(Integer id);
 
     Pizza createPizza(Pizza pizza);
+    
+    public List<Pizza> getAll();
 }
