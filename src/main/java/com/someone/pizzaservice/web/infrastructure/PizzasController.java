@@ -23,12 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class PizzasController {
     @Autowired
     PizzaService pizzaService;
-    @ModelAttribute
-    Pizza findPizza(@RequestParam(value="PizzaId",required=false) Integer pizzaId){
-        Pizza pizza=new Pizza();
-        if (pizzaId!=null) pizza=pizzaService.getPizzaByID(pizzaId);
-        return pizza;    
-    }
+    
     
     @RequestMapping("/ShowPizzas")
     public String showPizzas(Model model) {
@@ -50,7 +45,7 @@ public class PizzasController {
     }
     @RequestMapping(value="/save", method = RequestMethod.POST)
     public String editPizza(@ModelAttribute Pizza pizza){
-        System.out.println("editing pizza "+pizza.getId()+" "+pizza.getName());
+        System.out.println("editing pizza "+pizza);
         if (pizza.getId()==null)
             pizzaService.createPizza(pizza);
         else 
