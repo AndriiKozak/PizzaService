@@ -23,7 +23,7 @@ public class Pizza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Integer id;
     private String name;
     private Double price;
     @Enumerated(EnumType.STRING)
@@ -48,14 +48,14 @@ public class Pizza {
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

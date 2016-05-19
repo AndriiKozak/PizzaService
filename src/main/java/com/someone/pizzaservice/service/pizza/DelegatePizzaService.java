@@ -36,8 +36,19 @@ public class DelegatePizzaService implements PizzaService {
     public Pizza createPizza(Pizza pizza) {
         return pizzaRepository.createPizza(pizza);
     }
-    @Override
+    
     public List<Pizza> getAll(){
         return pizzaRepository.getAll();
+        
+        
     }
+
+    public Pizza updatePizza(Pizza pizza) {
+        return pizzaRepository.updatePizza(pizza);
+    }
+
+    public void deletePizza(Pizza pizza) {
+        pizzaRepository.deletePizza(pizza);
+    }
+    
 }

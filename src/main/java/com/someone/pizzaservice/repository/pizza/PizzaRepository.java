@@ -18,5 +18,9 @@ public interface PizzaRepository {
 
     Pizza createPizza(Pizza pizza);
     
-    public List<Pizza> getAll();
+    Pizza updatePizza(Pizza pizza);
+    
+    void deletePizza(Pizza pizza);
+    
+    List<Pizza> getAll();
 }

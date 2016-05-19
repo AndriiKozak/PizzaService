@@ -39,4 +39,14 @@ public class SpringJDBCPizzaRepository implements PizzaRepository {
     public List<Pizza> getAll() {
     return em.createQuery("select p from Pizza p", Pizza.class).getResultList();
  }
+
+    @Override
+    public Pizza updatePizza(Pizza pizza) {
+       return em.merge(pizza);
+    }
+    public void deletePizza(Pizza pizza) {
+        pizza=em.merge(pizza);
+        em.remove(pizza);
+    }
+    
 }

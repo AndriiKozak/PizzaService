@@ -18,5 +18,9 @@ public interface PizzaService {
 
     Pizza createPizza(Pizza pizza);
     
+    Pizza updatePizza(Pizza pizza);
+    
+    void deletePizza(Pizza pizza);
+    
     List<Pizza> getAll();
 }
