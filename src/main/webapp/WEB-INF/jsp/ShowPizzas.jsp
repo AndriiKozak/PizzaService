@@ -19,14 +19,12 @@
             <td>${pizza.name}</td>
             <td>${pizza.price}</td>
             <td>${pizza.type}</td>
-            <td><form method="Post">
+            <td><form method="Post" action="addNew">
                     <input type ="hidden" name="PizzaId" value="${pizza.id}"/>
-                    <input type="hidden" name="action" value="edit"/>
                     <input type="submit" value="edit"/>
                 </form></td>
-                <td><form method="Post"/>
+                <td><form method="Post" action="delete"/>
                     <input type ="hidden" name="PizzaId" value="${pizza.id}"/>
-                    <input type="hidden" name="action" value="delete"/>
                     <input type="submit" value="delete"/>
                 </form></td>    
         </tr>

@@ -20,10 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author Andrii_Kozak1
  */
 @org.springframework.stereotype.Controller
-public class ShowPizzasController {
+public class PizzasController {
     @Autowired
     PizzaService pizzaService;
-    //@ModelAttribute
+    @ModelAttribute
     Pizza findPizza(@RequestParam(value="PizzaId",required=false) Integer pizzaId){
         Pizza pizza=new Pizza();
         if (pizzaId!=null) pizza=pizzaService.getPizzaByID(pizzaId);
@@ -36,19 +36,11 @@ public class ShowPizzasController {
         System.out.println("showing pizzas");
         return "ShowPizzas";        
     }
-    @RequestMapping(value="/ShowPizzas", method=RequestMethod.POST)
-    public String redirectingToEdit(Model model, @RequestParam(value="PizzaId",required=false) Integer pizzaId, @RequestParam(value="action",required=true)String action,  final RedirectAttributes redirectAttributes) {
-         Pizza pizza=new Pizza();
-        if (pizzaId!=null) pizza=pizzaService.getPizzaByID(pizzaId);
-        redirectAttributes.addFlashAttribute(pizza);
-        System.out.println("gonna do "+ action);
-        System.out.println("gonna editing pizza");
-        System.out.println(pizza);
-        if (action.equals("delete")){
-            pizzaService.deletePizza(pizza);
-            return "redirect:ShowPizzas";}
-        else
-            return "redirect:addNew";        
+    @RequestMapping(value="/delete", method=RequestMethod.POST)
+    public String delete(Model model) {
+        Pizza pizza = (Pizza)model.asMap().get("pizza");
+        pizzaService.deletePizza(pizza);
+        return "redirect:ShowPizzas";
     }
     
     
@@ -56,7 +48,7 @@ public class ShowPizzasController {
     public String addNew(Model model){
         return "pizzaEdit";
     }
-    @RequestMapping(value="/addNew", method = RequestMethod.POST)
+    @RequestMapping(value="/save", method = RequestMethod.POST)
     public String editPizza(@ModelAttribute Pizza pizza){
         System.out.println("editing pizza "+pizza.getId()+" "+pizza.getName());
         if (pizza.getId()==null)
