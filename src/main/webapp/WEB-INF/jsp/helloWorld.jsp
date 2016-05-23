@@ -6,10 +6,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
+    <title>Register new customer</title>
 <body>
-Hello from JSP.
-${message}
-	
+ 
 </body>
 </html>
