@@ -12,11 +12,27 @@
         http://www.springframework.org/schema/context/spring-context.xsd ">
     
     <context:component-scan base-package="com.someone.pizzaservice.web"/> 
+    <mvc:annotation-driven  conversion-service="conversionService" />
+     <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.someone.pizzaservice.web.infrastructure.StringToPizza"/>
+            </set>
+        </property>
+    </bean>    
+     <mvc:view-resolvers>
+        <mvc:jsp prefix="/WEB-INF/jsp/" 
+                 suffix=".jsp" 
+                 view-class="org.springframework.web.servlet.view.JstlView"/>        
+    </mvc:view-resolvers>
+    <!--
     <bean id="viewResolver"
         class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
-    </bean>   
-  <mvc:annotation-driven />
+    </bean>
+    -->   
+  <!--<mvc:annotation-driven />-->
 </beans>
