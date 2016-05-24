@@ -85,4 +85,10 @@ public class SimpleOrderService implements OrderService {
         return pizzaCountMap;
     }
 
+    @Override
+    public Order placeNewOrder(Customer customer, Map<Pizza, Integer> pizzas) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+
 }

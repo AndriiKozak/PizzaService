@@ -6,35 +6,29 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
+    <title>Plese, confirm your order</title>
 <body>
-    ${customer}
+      ${customer}<br/>
+      ${order}<br/>
     <table border="1">
         <tr>
             <th>Name</th>
             <th>Price</th>
             <th>Type</th>
-            <th>Already ordered</th>
+            <th>Quantity</th>
             <th>Order more!</th>
         </tr> 
-        <c:forEach var="pizza" items="${pizzas}"> 
+        <c:forEach var="pizza" items="${cart.keySet()}"> 
         <tr>        
             <td>${pizza.name}</td>
             <td>${pizza.price}</td>
             <td>${pizza.type}</td>
             <td>${cart.get(pizza)}</td>
-            <td><form method="Post" action="addToOrder">
-                    <input type ="hidden" name="PizzaId" value="${pizza.id}"/>
-                    <input name="count" type="number" value="1"/>
-                    <input type="submit" value="Add to cart"/>
-                </form> 
-                    
         </tr>
         </c:forEach>
     </table>
-    <form method="Post" action="placeOrder">
+    <form method="Post" action="confirm">
         <input type="submit" value="Order this pizzas!"/>
     </form>
-    	
 </body>
 </html>

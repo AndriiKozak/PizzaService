@@ -49,6 +49,7 @@ public class Customer implements FactoryBean<Customer> {
     public Customer(String name, List<Address> addresses) {
         this.name = name;
         this.addresses = addresses;
+        dCard = NoCard.getInstance();
     }
 
     public void setName(String name) {
@@ -73,7 +74,8 @@ public class Customer implements FactoryBean<Customer> {
         return "Customer{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", address='" + addresses + '\''
+                + ", address='" + addresses + '\''+
+                dCard
                 + '}';
     }
 

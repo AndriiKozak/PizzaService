@@ -5,14 +5,12 @@
  */
 package com.someone.pizzaservice.web.infrastructure;
 
-import com.someone.pizzaservice.domain.customer.Address;
 import com.someone.pizzaservice.domain.customer.Customer;
+import com.someone.pizzaservice.domain.order.Order;
 import com.someone.pizzaservice.domain.pizza.Pizza;
 import com.someone.pizzaservice.service.order.OrderService;
 import com.someone.pizzaservice.service.pizza.PizzaService;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -57,7 +55,13 @@ public class OrderController {
             cart.put(pizza, count);
         }
         model.addAttribute("cart", cart);
-        
+           
         return "redirect:OrderPizzas";
+    }
+    @RequestMapping("/placeOrder") 
+    public String placeOrder(Model model, @ModelAttribute Customer customer, @ModelAttribute("cart") Map<Pizza,Integer> cart ){
+        Order order=orderService.placeNewOrder(customer, cart);
+        model.addAttribute(order);
+        return "placeOrder";
     }
 }

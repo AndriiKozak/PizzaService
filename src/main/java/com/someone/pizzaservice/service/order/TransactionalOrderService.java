@@ -41,6 +41,16 @@ public class TransactionalOrderService implements OrderService {
     }
 
     @Override
+    public Order placeNewOrder(Customer customer, Map<Pizza, Integer> pizzas) {
+        Order newOrder=createOrder();
+        newOrder.setCustomer(customer);
+        newOrder.setState(OrderState.NEW);
+        newOrder.setPizzaCountMap(pizzas);
+        orderRepository.saveOrder(newOrder);  
+        return newOrder;
+    }
+    
+    @Override
     //  @Benchmark
     public Order placeNewOrder(Customer customer, Integer... pizzasID) {
 
@@ -55,7 +65,7 @@ public class TransactionalOrderService implements OrderService {
         newOrder.setCustomer(customer);
         newOrder.setState(OrderState.NEW);
         newOrder.setPizzaCountMap(pizzaCountMap);
-        orderRepository.saveOrder(newOrder);  // set Entity.Order Id and save Entity.Order to in-memory list
+        orderRepository.saveOrder(newOrder);  
         return newOrder;
     }
 

@@ -7,6 +7,8 @@ package com.someone.pizzaservice.service.order;
 
 import com.someone.pizzaservice.domain.customer.Customer;
 import com.someone.pizzaservice.domain.order.Order;
+import com.someone.pizzaservice.domain.pizza.Pizza;
+import java.util.Map;
 
 /**
  *
@@ -17,4 +19,6 @@ public interface OrderService {
     Order placeNewOrder(Customer customer, Integer... pizzasID);
 
     Order proceed(Order order);
+    
+    Order placeNewOrder(Customer customer, Map<Pizza,Integer> pizzas);
 }
