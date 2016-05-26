@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context.xsd ">
     
-    <context:component-scan base-package="com.someone.pizzaservice.web"/> 
+    <context:component-scan base-package="com.someone.pizzaservice.web.http"/> 
     <mvc:annotation-driven  conversion-service="conversionService" />
      <bean id="conversionService"
           class="org.springframework.context.support.ConversionServiceFactoryBean">
